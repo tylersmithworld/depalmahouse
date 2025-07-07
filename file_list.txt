@@ -1,0 +1,46 @@
+.
+./product thumbs
+./product thumbs/P1014480.jpeg
+./product thumbs/P1014228.png
+./product thumbs/P1014199-Edit.png
+./product thumbs/IMG_7474.HEIC
+./product thumbs/P1014135.png
+./product thumbs/P1014219.png
+./product thumbs/P1014508.jpeg
+./product thumbs/08fdc971a8e460f148e676fd730c0aa7-og-product-image.png
+./product thumbs/il_1140xN.6537310998_otnb.webp
+./file_list.txt
+./.DS_Store
+./banners
+./banners/.DS_Store
+./banners/watch2.jpeg
+./banners/shop.jpg
+./banners/studio2.jpg
+./banners/Studio.jpg
+./banners/watch.jpeg
+./cover arts
+./cover arts/Check Me Out Cover V1.1.png
+./cover arts/Chill Cover 1.1 1080.png
+./cover arts/Parks and Rec cover Art.png
+./cover arts/J4U Cover 1.PNG
+./cover arts/Minutes From Estonia cove art.png
+./cover arts/Boeingananas V16 alt 1.png
+./cover arts/Boeingananas V16 breaks 2.png
+./cover arts/Do What You Want Cover V1.jpeg
+./cover arts/IMG_4442.PNG
+./cover arts/mq cover.jpg
+./cover arts/Special Edition Cover v13.png
+./cover arts/ynot simen sez!? cover art large.jpg
+./cover arts/boeing cover art.jpg
+./cover arts/Lex Koupe Understand Cover v8 big.jpg
+./yt thumbs
+./yt thumbs/Untitled (3).png
+./yt thumbs/C0429 - Simplified.00_01_32_32402.Still005.jpg
+./yt thumbs/A001_07241001_C011.00_05_36_25.Still001.png
+./yt thumbs/Motown Cover V1.jpg
+./yt thumbs/A001_07241001_C011.00_05_49_06.Still003.jpg
+./yt thumbs/C0429 - Simplified.00_00_25_27621.Still004.jpg
+./yt thumbs/Nested Sequence 02.00_00_57_21.Still003.jpg
+./yt thumbs/808 FINAL - Simplified.00_00_08_18.Still004.jpg
+./yt thumbs/youtube cover (2) ableton set simen 2.png
+./yt thumbs/Tyler Radio 5.00_15_09_03.Still014.pngg.png
