@@ -14,123 +14,62 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       font-family: 'Helvetica Neue', sans-serif;
       background-color: #fff;
       color: #000;
     }
 
-    .section {
+    .grid-menu {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+
+    .grid-menu a {
       position: relative;
+      display: block;
       width: 100%;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      height: 25vh;
       overflow: hidden;
     }
 
-    .section img.banner {
-      position: absolute;
+    .grid-menu img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       filter: brightness(0.6);
     }
 
-    .section h1 {
-      position: relative;
-      font-size: clamp(32px, 6vw, 64px);
-      color: #fff;
+    .grid-menu span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: clamp(24px, 6vw, 48px);
       letter-spacing: 2px;
-      text-align: center;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 4px;
-      padding: 16px;
-    }
-
-    .grid img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      cursor: pointer;
-      border: 1px solid #000;
     }
 
     @media (min-width: 768px) {
-      .section {
-        height: 75vh;
+      .grid-menu {
+        grid-template-columns: repeat(4, 1fr);
       }
-      .grid {
-        padding: 24px 48px;
-        gap: 8px;
+      .grid-menu a {
+        height: 100vh;
       }
-    }
-
-    .grid-section {
-      padding: 0;
     }
   </style>
 </head>
 <body>
 
-  <!-- YOUTUBE -->
-  <div class="section">
-    <img src="banners/watch.jpeg" alt="YouTube Banner" class="banner" />
-    <h1>YOUTUBE</h1>
-  </div>
-  <div class="grid-section">
-    <div class="grid">
-      <!-- REPLACE # WITH ACTUAL LINKS -->
-      <a href="#"><img src="yt thumbs/Untitled (3).png" alt="Video 1"></a>
-      <a href="#"><img src="yt thumbs/Motown Cover V1.jpg" alt="Video 2"></a>
-      <a href="#"><img src="yt thumbs/808 FINAL - Simplified.00_00_08_18.Still004.jpg" alt="Video 3"></a>
-    </div>
-  </div>
-
-  <!-- RECORDS -->
-  <div class="section">
-    <img src="cover arts/boeing cover art.jpg" alt="Records Banner" class="banner" />
-    <h1>RECORDS</h1>
-  </div>
-  <div class="grid-section">
-    <div class="grid">
-      <a href="#"><img src="cover arts/Chill Cover 1.1 1080.png" alt="Track 1"></a>
-      <a href="#"><img src="cover arts/Lex Koupe Understand Cover v8 big.jpg" alt="Track 2"></a>
-      <a href="#"><img src="cover arts/ynot simen sez!? cover art large.jpg" alt="Track 3"></a>
-    </div>
-  </div>
-
-  <!-- STUDIO -->
-  <div class="section">
-    <img src="banners/studio2.jpg" alt="Studio Banner" class="banner" />
-    <h1>STUDIO</h1>
-  </div>
-  <div class="grid-section">
-    <div class="grid">
-      <a href="https://depalmahouse.carrd.co"><img src="banners/Studio.jpg" alt="Studio 1"></a>
-      <a href="https://depalmahouse.carrd.co"><img src="yt thumbs/C0429 - Simplified.00_00_25_27621.Still004.jpg" alt="Studio 2"></a>
-    </div>
-  </div>
-
-  <!-- SHOP -->
-  <div class="section">
-    <img src="banners/shop.jpg" alt="Shop Banner" class="banner" />
-    <h1>SHOP</h1>
-  </div>
-  <div class="grid-section">
-    <div class="grid">
-      <a href="#"><img src="product thumbs/P1014228.png" alt="808 Pack"></a>
-      <a href="#"><img src="product thumbs/P1014508.jpeg" alt="Cable"></a>
-      <a href="#"><img src="product thumbs/P1014135.png" alt="Cable 2"></a>
-    </div>
+  <!-- Top Menu -->
+  <div class="grid-menu">
+    <a href="youtube.html"><img src="banners/watch.jpeg" alt="YouTube"><span>YOUTUBE</span></a>
+    <a href="records.html"><img src="cover arts/boeing cover art.jpg" alt="Records"><span>RECORDS</span></a>
+    <a href="studio.html"><img src="banners/studio2.jpg" alt="Studio"><span>STUDIO</span></a>
+    <a href="shop.html"><img src="banners/shop.jpg" alt="Shop"><span>SHOP</span></a>
   </div>
 
 </body>
 </html>
-
-
