@@ -16,7 +16,7 @@
       width: 100vw;
       height: 100vh;
       overflow: hidden;
-      background: #fff;
+      background: #000;
       font-family: 'Inter', sans-serif;
     }
 
@@ -68,18 +68,32 @@
     @media (max-width: 768px) {
       .store-grid {
         grid-template-columns: 0.3fr 1.4fr 0.3fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: 0.48fr 0.48fr;
+        padding-bottom: 4vh;
       }
 
       .store-item span {
         font-size: 6vw;
+        transform: translate(-50%, -45%);
       }
 
       .filler img {
         transform: scale(1.2);
       }
     }
-  </style>
+  
+    footer {
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+      color: #777;
+      font-weight: 400;
+      padding: 10px 0;
+      background: #000;
+      position: relative;
+    }
+
+</style>
   <script>
     function setVH() {
       document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
@@ -94,7 +108,7 @@
   <div class="store-grid">
     <!-- Row 1 -->
     <div class="store-item filler"><img src="product thumbs/1.jpg" alt=""></div>
-    <a class="store-item" href="https://www.etsy.com/shop/DepalmaCables" target="_blank">
+    <a class="store-item" href="https://elasticstage.com/depalmahouse" target="_blank">
       <img src="product thumbs/cables.png" alt="Cables">
       <span>CABLES</span>
     </a>
@@ -102,12 +116,17 @@
 
     <!-- Row 2 -->
     <div class="store-item filler"><img src="product thumbs/3.jpg" alt=""></div>
-    <a class="store-item" href="https://depalmahouse.gumroad.com" target="_blank">
+    <a class="store-item" href="https://open.spotify.com/playlist/0PTB5ofzE1dj29H1CR8EvS?si=06d5f80097a3413b" target="_blank">
       <img src="product thumbs/808.png" alt="Samples">
       <span>SAMPLES</span>
     </a>
     <div class="store-item filler"><img src="product thumbs/4.jpg" alt=""></div>
   </div>
+
+
+  <footer>
+    © 2025 Arts and Entertainment Company. All rights reserved.
+  </footer>
 
 </body>
 </html>

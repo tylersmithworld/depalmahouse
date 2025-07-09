@@ -17,7 +17,7 @@
       height: 100vh;
       overflow: hidden;
       font-family: 'Inter', sans-serif;
-      background-color: #fff;
+      background-color: #000;
     }
 
     .store-grid {
@@ -78,7 +78,19 @@
         transform: scale(1.2);
       }
     }
-  </style>
+  
+    footer {
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+      color: #777;
+      font-weight: 400;
+      padding: 10px 0;
+      background: #000;
+      position: relative;
+    }
+
+</style>
   <script>
     function setVH() {
       document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
@@ -107,6 +119,11 @@
     </a>
     <div class="store-item filler"><img src="product thumbs/8.jpg" alt=""></div>
   </div>
+
+
+  <footer>
+    © 2025 Arts and Entertainment Company. All rights reserved.
+  </footer>
 
 </body>
 </html>
