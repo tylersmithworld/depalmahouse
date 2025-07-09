@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- cover the iOS notch/status bar -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Depalma House Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Depalma House – Records</title>
 
   <!-- external stylesheet -->
   <link rel="stylesheet" href="main.css">
@@ -17,46 +14,40 @@
   <style>
     /* reset & base */
     *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      margin: 0; padding: 0; box-sizing: border-box;
     }
     html, body {
-      width: 100%;
-      height: 100%;
-      /* no scrolling, grid covers entire screen */
+      width: 100%; height: 100%;
       overflow: hidden;
       background: #000;
       font-family: 'Inter', sans-serif;
     }
 
-    /* —— STORE GRID —— */
+    /* —— FULL-SCREEN 3×2 GRID —— */
     .store-grid {
       position: absolute;
       inset: 0;  /* top:0; right:0; bottom:0; left:0; */
       display: grid;
       grid-template-columns: 1fr 2fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      grid-template-rows:    1fr    1fr;
     }
 
     .store-item {
       position: relative;
       overflow: hidden;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
     }
     .store-item img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       object-position: center;
       filter: brightness(0.6);
-      transition: transform 0.3s ease;
     }
-    .filler img {
+    .store-item.filler img {
       filter: brightness(0.3);
       transform: scale(1.4);
     }
+
     a.store-item {
       text-decoration: none;
     }
@@ -74,20 +65,15 @@
     /* —— MOBILE OVERRIDES —— */
     @media (max-width: 768px) {
       .store-grid {
-        /* same 3×2 fractions, but still fullscreen */
-        grid-template-columns: 0.3fr 1.4fr 0.3fr;
-        grid-template-rows: 0.48fr 0.48fr;
+        /* same 3×2 fractions, still full-screen */
+        grid-template-columns: 0.25fr 1.5fr 0.25fr;
+        grid-template-rows:    1fr    1fr;
       }
       .store-item span {
         font-size: 6vw;
-        transform: translate(-50%, -45%);
       }
-      .filler img {
+      .store-item.filler img {
         transform: scale(1.2);
-      }
-      /* slide the CABLES panel up so its bottom edge peeks in */
-      .store-grid a.store-item:nth-of-type(2) img {
-        object-position: center bottom;
       }
     }
   </style>
@@ -97,26 +83,26 @@
   <div class="store-grid">
     <!-- Row 1 -->
     <div class="store-item filler">
-      <img src="product thumbs/1.jpg" alt="">
+      <img src="product thumbs/10.jpg" alt="">
     </div>
-    <a class="store-item" href="https://elasticstage.com/depalmahouse" target="_blank">
-      <img src="product thumbs/cables.png" alt="Cables" style="object-position: center 40%;">
-      <span>CABLES</span>
+    <a class="store-item" href="https://open.spotify.com/playlist/0PTB5ofzE1dj29H1CR8EvS?si=3745119874134aa7" target="_blank">
+      <img src="product thumbs/12.jpeg" alt="Digital">
+      <span>DIGITAL</span>
     </a>
     <div class="store-item filler">
-      <img src="product thumbs/2.jpg" alt="">
+      <img src="product thumbs/3.jpg" alt="">
     </div>
 
     <!-- Row 2 -->
     <div class="store-item filler">
-      <img src="product thumbs/3.jpg" alt="">
+      <img src="product thumbs/9.jpg" alt="">
     </div>
-    <a class="store-item" href="https://open.spotify.com/playlist/0PTB5ofzE1dj29H1CR8EvS?si=06d5f80097a3413b" target="_blank">
-      <img src="product thumbs/808.png" alt="Samples">
-      <span>SAMPLES</span>
+    <a class="store-item" href="https://elasticstage.com/depalmahouse" target="_blank">
+      <img src="product thumbs/boeing2.jpg" alt="Physical">
+      <span>PHYSICAL</span>
     </a>
     <div class="store-item filler">
-      <img src="product thumbs/4.jpg" alt="">
+      <img src="product thumbs/8.jpg" alt="">
     </div>
   </div>
 
