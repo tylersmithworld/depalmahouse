@@ -25,7 +25,7 @@
       grid-template-columns: 1fr 2fr 1fr;
       grid-template-rows: 1fr 1fr;
       width: 100vw;
-      height: 100vh;
+      height: calc(var(--vh, 1vh) * 100);
     }
 
     .store-item {
@@ -80,13 +80,21 @@
       }
     }
   </style>
+  <script>
+    function setVH() {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    }
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', setVH);
+    setVH();
+  </script>
 </head>
 <body>
 
   <div class="store-grid">
     <!-- Row 1 -->
     <div class="store-item filler"><img src="product thumbs/1.jpg" alt=""></div>
-    <a class="store-item" href="#">
+    <a class="store-item" href="https://www.etsy.com/shop/DepalmaCables" target="_blank">
       <img src="product thumbs/cables.png" alt="Cables">
       <span>CABLES</span>
     </a>
@@ -94,7 +102,7 @@
 
     <!-- Row 2 -->
     <div class="store-item filler"><img src="product thumbs/3.jpg" alt=""></div>
-    <a class="store-item" href="#">
+    <a class="store-item" href="https://depalmahouse.gumroad.com" target="_blank">
       <img src="product thumbs/808.png" alt="Samples">
       <span>SAMPLES</span>
     </a>
