@@ -2,30 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Depalma House – Records</title>
+  <!-- cover the iOS notch/status bar -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Depalma House Store</title>
+
+  <!-- external stylesheet -->
+  <link rel="stylesheet" href="main.css">
+
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap" rel="stylesheet" />
+
   <style>
-    * {
+    /* reset & base */
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     html, body {
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
+      /* no scrolling, grid covers entire screen */
       overflow: hidden;
+      background: #000;
       font-family: 'Inter', sans-serif;
-      background-color: #000;
     }
 
+    /* —— STORE GRID —— */
     .store-grid {
+      position: absolute;
+      inset: 0;  /* top:0; right:0; bottom:0; left:0; */
       display: grid;
       grid-template-columns: 1fr 2fr 1fr;
       grid-template-rows: 1fr 1fr;
-      width: 100vw;
-      height: calc(var(--vh, 1vh) * 100);
     }
 
     .store-item {
@@ -34,96 +45,80 @@
       width: 100%;
       height: 100%;
     }
-
     .store-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
       filter: brightness(0.6);
+      transition: transform 0.3s ease;
     }
-
-    .store-item.filler img {
+    .filler img {
       filter: brightness(0.3);
       transform: scale(1.4);
     }
-
+    a.store-item {
+      text-decoration: none;
+    }
     .store-item span {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      color: white;
+      color: #fff;
       font-weight: 900;
       font-size: min(4vw, 28px);
       pointer-events: none;
       letter-spacing: -0.5px;
     }
 
-    a.store-item {
-      text-decoration: none;
-    }
-
+    /* —— MOBILE OVERRIDES —— */
     @media (max-width: 768px) {
       .store-grid {
-        grid-template-columns: 0.25fr 1.5fr 0.25fr;
-        grid-template-rows: 1fr 1fr;
+        /* same 3×2 fractions, but still fullscreen */
+        grid-template-columns: 0.3fr 1.4fr 0.3fr;
+        grid-template-rows: 0.48fr 0.48fr;
       }
-
       .store-item span {
         font-size: 6vw;
+        transform: translate(-50%, -45%);
       }
-
-      .store-item.filler img {
+      .filler img {
         transform: scale(1.2);
       }
+      /* slide the CABLES panel up so its bottom edge peeks in */
+      .store-grid a.store-item:nth-of-type(2) img {
+        object-position: center bottom;
+      }
     }
-  
-    footer {
-      width: 100%;
-      text-align: center;
-      font-size: 10px;
-      color: #777;
-      font-weight: 400;
-      padding: 10px 0;
-      background: #000;
-      position: relative;
-    }
-
-</style>
-  <script>
-    function setVH() {
-      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-    }
-    window.addEventListener('resize', setVH);
-    window.addEventListener('orientationchange', setVH);
-    setVH();
-  </script>
+  </style>
 </head>
 <body>
 
   <div class="store-grid">
     <!-- Row 1 -->
-    <div class="store-item filler"><img src="product thumbs/10.jpg" alt=""></div>
-    <a class="store-item" href="https://open.spotify.com/playlist/0PTB5ofzE1dj29H1CR8EvS?si=3745119874134aa7" target="_blank">
-      <img src="product thumbs/12.jpeg" alt="Digital">
-      <span>DIGITAL</span>
+    <div class="store-item filler">
+      <img src="product thumbs/1.jpg" alt="">
+    </div>
+    <a class="store-item" href="https://elasticstage.com/depalmahouse" target="_blank">
+      <img src="product thumbs/cables.png" alt="Cables" style="object-position: center 40%;">
+      <span>CABLES</span>
     </a>
-    <div class="store-item filler"><img src="product thumbs/3.jpg" alt=""></div>
+    <div class="store-item filler">
+      <img src="product thumbs/2.jpg" alt="">
+    </div>
 
     <!-- Row 2 -->
-    <div class="store-item filler"><img src="product thumbs/9.jpg" alt=""></div>
-    <a class="store-item" href="https://elasticstage.com/depalmahouse" target="_blank">
-      <img src="product thumbs/boeing2.jpg" alt="Physical">
-      <span>PHYSICAL</span>
+    <div class="store-item filler">
+      <img src="product thumbs/3.jpg" alt="">
+    </div>
+    <a class="store-item" href="https://open.spotify.com/playlist/0PTB5ofzE1dj29H1CR8EvS?si=06d5f80097a3413b" target="_blank">
+      <img src="product thumbs/808.png" alt="Samples">
+      <span>SAMPLES</span>
     </a>
-    <div class="store-item filler"><img src="product thumbs/8.jpg" alt=""></div>
+    <div class="store-item filler">
+      <img src="product thumbs/4.jpg" alt="">
+    </div>
   </div>
-
-
-  <footer>
-    © 2025 Arts and Entertainment Company. All rights reserved.
-  </footer>
 
 </body>
 </html>
