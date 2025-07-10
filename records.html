@@ -1,110 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <!-- allow under-notch display -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
   <title>Depalma House – Records</title>
 
-  <!-- external stylesheet -->
-  <link rel="stylesheet" href="main.css">
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap" rel="stylesheet"/>
 
   <style>
     /* reset & base */
-    *, *::before, *::after {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html, body {
-      width: 100%; height: 100%;
-      overflow: hidden;
-      background: #000;
-      font-family: 'Inter', sans-serif;
+      width:100%; height:100%; overflow:hidden;
+      background:#000; font-family:'Inter',sans-serif;
     }
 
-    /* —— FULL-SCREEN 3×2 GRID —— */
+    /* full-screen 2-button grid */
     .store-grid {
-      position: absolute;
-      inset: 0;  /* top:0; right:0; bottom:0; left:0; */
-      display: grid;
-      grid-template-columns: 1fr 2fr 1fr;
-      grid-template-rows:    1fr    1fr;
+      position:absolute;
+      inset:0;
+      display:grid;
     }
-
     .store-item {
-      position: relative;
-      overflow: hidden;
-      width: 100%; height: 100%;
+      position:relative;
+      overflow:hidden;
+      width:100%; height:100%;
     }
     .store-item img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center;
-      filter: brightness(0.6);
-    }
-    .store-item.filler img {
-      filter: brightness(0.3);
-      transform: scale(1.4);
-    }
-
-    a.store-item {
-      text-decoration: none;
+      width:100%; height:100%;
+      object-fit:cover; object-position:center;
+      filter:brightness(0.6);
+      transition:transform .3s ease;
     }
     .store-item span {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      color: #fff;
-      font-weight: 900;
-      font-size: min(4vw, 28px);
-      pointer-events: none;
-      letter-spacing: -0.5px;
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      color:#fff; font-weight:900;
+      font-size:min(4vw,28px);
+      pointer-events:none;
+      letter-spacing:-0.5px;
     }
 
-    /* —— MOBILE OVERRIDES —— */
+    /* mobile: 1col×2row */
     @media (max-width: 768px) {
       .store-grid {
-        /* same 3×2 fractions, still full-screen */
-        grid-template-columns: 0.25fr 1.5fr 0.25fr;
-        grid-template-rows:    1fr    1fr;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
       }
       .store-item span {
-        font-size: 6vw;
+        font-size:6vw;
+        transform:translate(-50%,-45%);
       }
-      .store-item.filler img {
-        transform: scale(1.2);
+    }
+    /* desktop: 2col×1row */
+    @media (min-width: 769px) {
+      .store-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
       }
     }
   </style>
 </head>
-<body>
 
+<body>
   <div class="store-grid">
-    <!-- Row 1 -->
-    <div class="store-item filler">
-      <img src="product thumbs/10.jpg" alt="">
-    </div>
-    <a class="store-item" href="https://open.spotify.com/playlist/0PTB5ofzE1dj29H1CR8EvS?si=3745119874134aa7" target="_blank">
+    <a class="store-item"
+       href="https://open.spotify.com/playlist/0PTB5ofzE1dj29H1CR8EvS?si=3745119874134aa7"
+       target="_blank">
       <img src="product thumbs/12.jpeg" alt="Digital">
       <span>DIGITAL</span>
     </a>
-    <div class="store-item filler">
-      <img src="product thumbs/3.jpg" alt="">
-    </div>
 
-    <!-- Row 2 -->
-    <div class="store-item filler">
-      <img src="product thumbs/9.jpg" alt="">
-    </div>
-    <a class="store-item" href="https://elasticstage.com/depalmahouse" target="_blank">
+    <a class="store-item"
+       href="https://elasticstage.com/depalmahouse"
+       target="_blank">
       <img src="product thumbs/boeing2.jpg" alt="Physical">
       <span>PHYSICAL</span>
     </a>
-    <div class="store-item filler">
-      <img src="product thumbs/8.jpg" alt="">
-    </div>
   </div>
-
 </body>
 </html>
