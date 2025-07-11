@@ -13,79 +13,92 @@
 
   <style>
     /* reset & base */
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     html, body {
-      width:100%; height:100%; overflow:hidden;
-      background:#000; font-family:'Inter',sans-serif;
+      width: 100%; height: 100%; overflow: hidden;
+      background: #000; font-family: 'Inter', sans-serif;
     }
 
     /* —— FULL-SCREEN 2-BUTTON GRID —— */
     .store-grid {
-      position:absolute; inset:0;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      grid-template-rows:1fr;
-      gap:0;
+      position: absolute; inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      gap: 0;
     }
 
     .store-item {
-      position:relative; overflow:hidden;
-      width:100%; height:100%; text-decoration:none;
+      position: relative; overflow: hidden;
+      width: 100%; height: 100%; text-decoration: none;
     }
     .store-item img {
-      width:100%; height:100%; object-fit:cover;
-      object-position:center; filter:brightness(0.6);
-      transition:transform .3s ease;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      filter: brightness(0.6);
+      transition: transform .3s ease;
     }
     .store-item span {
-      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-      color:#fff; font-weight:900; font-size:min(4vw,28px);
-      pointer-events:none; letter-spacing:-0.5px;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff; font-weight: 900;
+      font-size: min(4vw, 28px);
+      pointer-events: none;
+      letter-spacing: -0.5px;
     }
 
     /* —— DIGITAL PANEL (6.jpg) —— */
     .store-item.digital img {
-      /* no extra zoom or tilt */
-      transform: none;
+      transform: scale(1.4) rotate(-0.3deg);
+      transform-origin: center center;
     }
 
     /* —— PHYSICAL PANEL (boeing2.jpg) —— */
     .store-item.physical img {
-      /* centered, no slide */
       transform: none;
     }
 
-   @media (max-width: 768px) {
-  .store-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
-  .store-item span {
-    font-size: 6vw;
-    transform: translate(-50%, -45%);
-  }
-  /* reset any other transforms */
-  .store-item img {
-    transform: none;
-  }
-  /* then zoom just 6.jpg */
-  .store-item.digital img {
-    transform: scale(1.4);
-    transform-origin: center center;
-  }
-}
+    /* —— MOBILE ADAPTATIONS —— */
+    @media (max-width: 768px) {
+      /* switch to 2-row single-column */
+      .store-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+      }
+      /* slightly adjust text size & position */
+      .store-item span {
+        font-size: 6vw;
+        transform: translate(-50%, -45%);
+      }
+      /* clear all transforms first */
+      .store-item img {
+        transform: none;
+      }
+      /* re-apply digital zoom+tilt on mobile */
+      .store-item.digital img {
+        transform: scale(1.4) rotate(-0.3deg);
+        transform-origin: center center;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="store-grid">
     <!-- DIGITAL (left on desktop / top on mobile) -->
-    <a class="store-item digital" href="https://open.spotify.com/playlist/0PTB5ofzE1dj29H1CR8EvS?si=3745119874134aa7" target="_blank">
+    <a class="store-item digital"
+       href="https://open.spotify.com/playlist/0PTB5ofzE1dj29H1CR8EvS?si=3745119874134aa7"
+       target="_blank">
       <img src="product thumbs/6.jpeg" alt="Digital">
       <span>DIGITAL</span>
     </a>
 
     <!-- PHYSICAL (right on desktop / bottom on mobile) -->
-    <a class="store-item physical" href="https://elasticstage.com/depalmahouse" target="_blank">
+    <a class="store-item physical"
+       href="https://elasticstage.com/depalmahouse"
+       target="_blank">
       <img src="product thumbs/boeing2.jpg" alt="Physical">
       <span>PHYSICAL</span>
     </a>
