@@ -55,11 +55,25 @@
       transform: none;
     }
 
-    @media (max-width: 768px) {
-      .store-grid { grid-template-columns:1fr; grid-template-rows:1fr 1fr; }
-      .store-item span { font-size:6vw; transform:translate(-50%,-45%); }
-      .store-item img { transform:none; }
-    }
+   @media (max-width: 768px) {
+  .store-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  .store-item span {
+    font-size: 6vw;
+    transform: translate(-50%, -45%);
+  }
+  /* reset any other transforms */
+  .store-item img {
+    transform: none;
+  }
+  /* then zoom just 6.jpg */
+  .store-item.digital img {
+    transform: scale(1.4);
+    transform-origin: center center;
+  }
+}
   </style>
 </head>
 <body>
