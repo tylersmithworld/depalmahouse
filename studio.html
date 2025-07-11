@@ -86,11 +86,14 @@
     /* when scrollY>0, show at small size */
     opacity: 0.95;
     pointer-events: auto;
-  }
-  /* at-bottom stays the same small size */
-  .floating-contact-bar.at-bottom {
-    /* no extra transform needed here */
-  }
+.floating-contact-bar.at-bottom {
+  /* when scrolled to bottom: shift to top center */
+  top: 16px !important;
+  bottom: auto !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+}
 }
   </style>
 </head>
