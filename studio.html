@@ -62,30 +62,36 @@
       .floating-contact-bar:not(.at-bottom) { right: 22.5vw; }
     }
 
-    /* Mobile: smaller & always visible */
-    @media (max-width: 768px) {
-      .floating-contact-bar {
-        bottom: 16px;
-        top: auto;
-        left: 16px;
-        right: 16px;
-        width: auto;
-        justify-content: space-between;
-        padding: 10px 16px;
-        font-size: 12px;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        transition: opacity 0.3s ease;
-      }
-      /* At-bottom on mobile: no slide */
-      .floating-contact-bar.at-bottom {
-        top: 16px !important;
-        bottom: auto !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: none !important;
-      }
-    }
+   /* Mobile: hidden until scroll, then small */
+@media (max-width: 768px) {
+  .floating-contact-bar {
+    /* position at bottom, but hidden by default */
+    bottom: 16px;
+    top: auto;
+    left: 16px;
+    right: 16px;
+    width: auto;
+    justify-content: space-between;
+
+    /* small size */
+    padding: 10px 16px;
+    font-size: 12px;
+
+    /* start hidden */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .floating-contact-bar.visible {
+    /* when scrollY>0, show at small size */
+    opacity: 0.95;
+    pointer-events: auto;
+  }
+  /* at-bottom stays the same small size */
+  .floating-contact-bar.at-bottom {
+    /* no extra transform needed here */
+  }
+}
   </style>
 </head>
 <body>
