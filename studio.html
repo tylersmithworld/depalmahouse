@@ -37,21 +37,24 @@
       gap: 10px;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-10px) translateX(0);
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition: opacity 0.3s ease;
       z-index: 999;
     }
-    .floating-contact-bar.visible { opacity: 0.95; pointer-events: auto; transform: translateY(0) translateX(0); }
+    .floating-contact-bar.visible { 
+      opacity: 0.95;
+      pointer-events: auto;
+    }
     .floating-contact-bar:hover { background: rgba(192, 89, 50, 0.9); }
     .arrow-icon { stroke: #fff; transition: transform 0.2s ease; }
     .floating-contact-bar:hover .arrow-icon { transform: translateX(3px); }
 
-    /* At-bottom state */
+    /* At-bottom state: no slide, only reposition */
     .floating-contact-bar.at-bottom {
       top: auto;
       bottom: 3vw;
-      right: 50%;
-      transform: translateY(0) translateX(50%);
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
     }
 
     /* Desktop: refine positioning */
@@ -72,15 +75,15 @@
         font-size: 12px;
         opacity: 1 !important;
         pointer-events: auto !important;
-        transform: none !important;
+        transition: opacity 0.3s ease;
       }
-      /* Move to top-center on bottom reach */
+      /* At-bottom on mobile: no slide */
       .floating-contact-bar.at-bottom {
-        bottom: auto !important;
         top: 16px !important;
+        bottom: auto !important;
         left: 50% !important;
         right: auto !important;
-        transform: translateX(-50%) !important;
+        transform: none !important;
       }
     }
   </style>
@@ -89,22 +92,18 @@
 
   <div class="image-stack">
     <div class="image-wrapper">
-      <img src="Depalma PNG deck v10/title.png.webp" alt="Title">
+      <img src="Depalma PNG deck v10/title.png" alt="Title">
     </div>
-    <img src="Depalma PNG deck v10/main.png.webp" alt="Main Studio">
-    <img src="Depalma PNG deck v10/control.png.webp" alt="Control Room">
-  <img src="Depalma PNG deck v10/broom.png.webp" alt="Broom">
-    <img src="Depalma PNG deck v10/gear.png.webp" alt="Gear">
-    <img src="Depalma PNG deck v10/SMINO.png.webp" alt="Smino">
-
-<img src="Depalma PNG deck v10/remi.png.webp" alt="Remi">
-    <img src="Depalma PNG deck v10/DEB.png.webp" alt="DEB">
-    
-    <img src="Depalma PNG deck v10/hALF.png.webp" alt="Half">
-    <img src="Depalma PNG deck v10/boof.png.webp" alt="Boof">
-  
-
-    <img src="Depalma PNG deck v10/credits.png.webp" alt="Credits">
+    <img src="Depalma PNG deck v10/main.png" alt="Main Studio">
+    <img src="Depalma PNG deck v10/control.png" alt="Control Room">
+    <img src="Depalma PNG deck v10/broom.png" alt="Broom">
+    <img src="Depalma PNG deck v10/gear.png" alt="Gear">
+    <img src="Depalma PNG deck v10/SMINO.png" alt="Smino">
+    <img src="Depalma PNG deck v10/remi.png" alt="Remi">
+    <img src="Depalma PNG deck v10/DEB.png" alt="DEB">
+    <img src="Depalma PNG deck v10/hALF.png" alt="Half">
+    <img src="Depalma PNG deck v10/boof.png" alt="Boof">
+    <img src="Depalma PNG deck v10/credits.png" alt="Credits">
   </div>
 
   <a href="https://depalmahouse.carrd.co/" target="_blank" class="floating-contact-bar">

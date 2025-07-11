@@ -21,86 +21,57 @@
 
     /* —— FULL-SCREEN 2-BUTTON GRID —— */
     .store-grid {
-      position:absolute;
-      inset:0;                         /* fill the viewport */
+      position:absolute; inset:0;
       display:grid;
-      grid-template-columns:1fr 1fr;   /* two equal columns */
-      grid-template-rows:1fr;          /* one row */
-      gap:0;                           /* no gaps */
+      grid-template-columns:1fr 1fr;
+      grid-template-rows:1fr;
+      gap:0;
     }
 
     .store-item {
       position:relative; overflow:hidden;
-      width:100%; height:100%;
-      text-decoration:none;
+      width:100%; height:100%; text-decoration:none;
     }
     .store-item img {
-      width:100%; height:100%;
-      object-fit:cover;
-      object-position:center;
-      filter:brightness(0.6);
+      width:100%; height:100%; object-fit:cover;
+      object-position:center; filter:brightness(0.6);
       transition:transform .3s ease;
     }
     .store-item span {
-      position:absolute;
-      top:50%; left:50%;
-      transform:translate(-50%,-50%);
-      color:#fff; font-weight:900;
-      font-size:min(4vw,28px);
-      pointer-events:none;
-      letter-spacing:-0.5px;
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      color:#fff; font-weight:900; font-size:min(4vw,28px);
+      pointer-events:none; letter-spacing:-0.5px;
     }
 
     /* —— DIGITAL PANEL (6.jpg) —— */
     .store-item.digital img {
-      /* zoom ~25% + slight left tilt */
-      transform: scale(1.6) rotate(-0.5deg);
-      transform-origin: center center;
+      /* no extra zoom or tilt */
+      transform: none;
     }
 
-/* —— PHYSICAL PANEL (boeing2.jpg) —— */
-.store-item.physical img {
-  object-fit: cover;
-  width: 120%;
-  height: 100%;
-  transform: translateX(-10%);
-  object-position: center center;
-}
+    /* —— PHYSICAL PANEL (boeing2.jpg) —— */
+    .store-item.physical img {
+      /* centered, no slide */
+      transform: none;
+    }
 
-@media (max-width: 768px) {
-  .store-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-  }
-  .store-item span {
-    font-size: 6vw;
-    transform: translate(-50%, -45%);
-  }
-
-  .store-item.physical img {
-    width: 100%;
-    height: 100%;
-    transform: scale(100);
-    transform-origin: center center;
-  }
-}
-    
+    @media (max-width: 768px) {
+      .store-grid { grid-template-columns:1fr; grid-template-rows:1fr 1fr; }
+      .store-item span { font-size:6vw; transform:translate(-50%,-45%); }
+      .store-item img { transform:none; }
+    }
   </style>
 </head>
 <body>
   <div class="store-grid">
     <!-- DIGITAL (left on desktop / top on mobile) -->
-    <a class="store-item digital"
-       href="https://open.spotify.com/playlist/0PTB5ofzE1dj29H1CR8EvS?si=3745119874134aa7"
-       target="_blank">
+    <a class="store-item digital" href="https://open.spotify.com/playlist/0PTB5ofzE1dj29H1CR8EvS?si=3745119874134aa7" target="_blank">
       <img src="product thumbs/6.jpg" alt="Digital">
       <span>DIGITAL</span>
     </a>
 
     <!-- PHYSICAL (right on desktop / bottom on mobile) -->
-    <a class="store-item physical"
-       href="https://elasticstage.com/depalmahouse"
-       target="_blank">
+    <a class="store-item physical" href="https://elasticstage.com/depalmahouse" target="_blank">
       <img src="product thumbs/boeing2.jpg" alt="Physical">
       <span>PHYSICAL</span>
     </a>
