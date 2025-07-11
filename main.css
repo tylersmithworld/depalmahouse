@@ -1,0 +1,63 @@
+/* ——— Floating Contact Button ——— */
+.floating-contact-bar {
+  position: fixed;
+  top: 3vw;
+  right: 3vw;
+  background: rgba(210, 103, 60, 0.85); /* mid-century modern orange */
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 22px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* visible state after scrolling */
+.floating-contact-bar.visible {
+  opacity: 0.95;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.floating-contact-bar:hover {
+  background: rgba(192, 89, 50, 0.9);
+}
+
+.arrow-icon {
+  stroke: #fff;
+  transition: transform 0.2s ease;
+}
+
+.floating-contact-bar:hover .arrow-icon {
+  transform: translateX(3px);
+}
+
+/* mobile: full width footer style */
+@media (max-width: 768px) {
+  .floating-contact-bar {
+    top: auto;
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    transform: none;
+    justify-content: space-between;
+    padding: 14px 18px;
+    font-size: 13px;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+}
