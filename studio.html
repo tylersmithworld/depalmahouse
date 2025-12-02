@@ -40,7 +40,7 @@
       transition: opacity 0.3s ease;
       z-index: 999;
     }
-    .floating-contact-bar.visible { 
+    .floating-contact-bar.visible {
       opacity: 0.95;
       pointer-events: auto;
     }
@@ -62,26 +62,27 @@
       .floating-contact-bar:not(.at-bottom) { right: 22.5vw; }
     }
 
-   /* Mobile: hidden until scroll, then small; moves to top on bottom */
+   /* Mobile: hidden until scroll, then centered; moves to top on bottom */
 @media (max-width: 768px) {
   .floating-contact-bar {
     position: fixed;
     bottom: 16px;
-    left: 16px;
-    right: 16px;
+    left: 50%;
+    right: auto;
     top: auto;
     padding: 10px 16px;
     font-size: 12px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(-50%);
   }
 
-  /* appear in corner once you've scrolled */
+  /* appear centered once you've scrolled */
   .floating-contact-bar.visible {
     opacity: 0.95;
     pointer-events: auto;
-    transform: none;
+    transform: translateX(-50%);
   }
 
   /* when you've hit the bottom AND are visible, move to top center */
@@ -93,6 +94,34 @@
     transform: translateX(-50%);
   }
 }
+
+    /* —— HOME BUTTON —— */
+    .home-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: background 0.2s ease;
+    }
+    .home-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+    .home-btn svg {
+      stroke: #fff;
+    }
+    @media (max-width: 768px) {
+      .home-btn {
+        left: auto;
+        right: 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -117,6 +146,15 @@
     <span>Contact us</span>
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-icon">
       <path d="M5 12l5-5-5-5" />
+    </svg>
+  </a>
+
+  <!-- Home Button -->
+  <a href="index.html" class="home-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke-width="2" stroke-linecap="round">
+      <line x1="4" y1="7" x2="20" y2="7"/>
+      <line x1="4" y1="12" x2="20" y2="12"/>
+      <line x1="4" y1="17" x2="20" y2="17"/>
     </svg>
   </a>
 

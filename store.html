@@ -54,6 +54,28 @@
       transform-origin: center center;
     }
 
+    /* —— HOME BUTTON —— */
+    .home-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: background 0.2s ease;
+    }
+    .home-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+    .home-btn svg {
+      stroke: #fff;
+    }
+
     @media (max-width:768px) {
       .store-grid { grid-template-columns:1fr; grid-template-rows:1fr 1fr; }
       .store-item span { font-size:6vw; transform:translate(-50%,-45%); }
@@ -80,5 +102,14 @@
       <span>SAMPLES</span>
     </a>
   </div>
+
+  <!-- Home Button -->
+  <a href="index.html" class="home-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke-width="2" stroke-linecap="round">
+      <line x1="4" y1="7" x2="20" y2="7"/>
+      <line x1="4" y1="12" x2="20" y2="12"/>
+      <line x1="4" y1="17" x2="20" y2="17"/>
+    </svg>
+  </a>
 </body>
 </html>
