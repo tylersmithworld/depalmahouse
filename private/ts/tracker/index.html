@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depalma House Records — Catalog & Rights Tracker | Tyler Smith</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0b;--surface:#111113;--surface2:#18181b;--surface3:#222225;--border:#2a2a2e;--border-light:#333338;--text:#e4e4e7;--text-secondary:#a1a1aa;--text-muted:#71717a;--accent:#3b82f6;--accent-dim:#1e3a5f;--green:#22c55e;--green-bg:#052e16;--yellow:#eab308;--yellow-bg:#422006;--red:#ef4444;--red-bg:#450a0a;--gray-badge:#3f3f46;--font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--radius:8px;--radius-lg:12px}
+html{font-size:15px;-webkit-font-smoothing:antialiased}body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.5;min-height:100vh}::selection{background:var(--accent);color:#fff}input,button{font-family:inherit}
+.app{max-width:1480px;margin:0 auto;padding:24px 32px 64px}
+
+/* Context banner */
+.context-banner{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid var(--border-light);border-radius:var(--radius-lg);padding:20px 28px;margin-bottom:32px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.context-banner-text{display:flex;flex-direction:column;gap:4px}
+.context-banner-title{font-size:.82rem;font-weight:600;color:var(--text);letter-spacing:-.01em}
+.context-banner-sub{font-size:.72rem;color:var(--text-muted);line-height:1.5}
+.context-banner-badge{background:var(--accent-dim);border:1px solid rgba(59,130,246,.3);border-radius:6px;padding:8px 16px;font-size:.68rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+
+.header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border)}.header-left{display:flex;flex-direction:column;gap:6px}.logo{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);opacity:.9}.title{font-size:1.6rem;font-weight:600;color:var(--text);letter-spacing:-.02em}.subtitle{font-size:.8rem;color:var(--text-muted);font-weight:400}.header-right{display:flex;gap:10px;align-items:center}
+.refresh-btn{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 14px;color:var(--text-secondary);font-size:.78rem;cursor:pointer;transition:all .15s;font-weight:500;font-family:var(--font)}.refresh-btn:hover{background:var(--surface3);border-color:var(--border-light);color:var(--text)}.last-sync{font-size:.68rem;color:var(--text-muted)}
+
+.stats{display:flex;gap:16px;margin-bottom:28px;flex-wrap:wrap}.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 22px;min-width:130px;transition:border-color .2s}.stat:hover{border-color:var(--border-light)}.stat-value{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;color:var(--text)}.stat-label{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}.stat--alert .stat-value{color:var(--yellow)}.stat--good .stat-value{color:var(--green)}.stat--red .stat-value{color:var(--red)}
+
+.toolbar{display:flex;gap:10px;margin-bottom:20px;align-items:center;flex-wrap:wrap}.search{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:9px 14px 9px 36px;color:var(--text);font-size:.85rem;width:320px;outline:none;transition:border-color .2s}.search:focus{border-color:var(--accent)}.search-wrap{position:relative}.search-wrap::before{content:'⌕';position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:1rem}.filter-btn{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 14px;color:var(--text-secondary);font-size:.78rem;cursor:pointer;transition:all .15s;font-weight:500;font-family:var(--font)}.filter-btn:hover,.filter-btn.active{background:var(--surface3);border-color:var(--border-light);color:var(--text)}.filter-btn.active{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+
+.loading{text-align:center;padding:80px 20px;color:var(--text-muted)}.loading-spinner{display:inline-block;width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px}@keyframes spin{to{transform:rotate(360deg)}}.loading-text{font-size:.85rem}.error-msg{text-align:center;padding:60px 20px;color:var(--red);font-size:.85rem}
+
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}.table-scroll{overflow-x:auto;max-height:72vh;overflow-y:auto}table{width:100%;border-collapse:collapse}thead{position:sticky;top:0;z-index:10}th{background:var(--surface2);padding:11px 14px;text-align:left;font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);border-bottom:1px solid var(--border);white-space:nowrap}td{padding:11px 14px;border-bottom:1px solid var(--border);font-size:.8rem;color:var(--text-secondary);vertical-align:middle}tr.row{transition:background .12s}tr.row:hover{background:var(--surface2)}tr.row:last-child td{border-bottom:none}
+
+.col-num{width:36px;text-align:center;color:var(--text-muted);font-family:var(--mono);font-size:.72rem}.col-title{font-weight:600;color:var(--text)!important;min-width:200px}.col-artist{min-width:130px}.col-writers{min-width:200px;font-size:.78rem}.col-producer{min-width:120px;font-size:.78rem}.col-source{min-width:140px;font-size:.75rem}.col-isrc{font-family:var(--mono);font-size:.72rem;min-width:110px}.col-flags{min-width:40px;text-align:center}.col-expand{width:36px;text-align:center}
+
+.track-title{display:flex;flex-direction:column;gap:1px}.track-title span{font-size:.68rem;color:var(--text-muted);font-weight:400}
+.badge{display:inline-block;padding:3px 8px;border-radius:4px;font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em}.badge--released{background:var(--green-bg);color:var(--green)}.badge--pending{background:var(--yellow-bg);color:var(--yellow)}.badge--missing{background:var(--red-bg);color:var(--red)}.badge--gray{background:var(--gray-badge);color:var(--text-muted)}.badge--blue{background:#172554;color:#60a5fa}.badge--sync{background:#052e16;color:#4ade80;font-size:.58rem;margin-left:4px}.badge--nosync{background:#450a0a;color:#f87171;font-size:.58rem;margin-left:4px}
+
+.flag-dot{width:8px;height:8px;border-radius:50%;display:inline-block}.flag-dot--warn{background:var(--yellow);box-shadow:0 0 6px rgba(234,179,8,.3)}.flag-dot--ok{background:var(--green);opacity:.4}
+.stale{text-decoration:line-through;opacity:.35;font-size:.72rem}.corrected{color:var(--accent);font-size:.75rem}.correction{color:var(--red);font-size:.72rem}
+
+.detail-row{display:none}.detail-row.open{display:table-row}.detail-row td{background:var(--surface2);padding:0;border-bottom:1px solid var(--border)}.detail-inner{padding:20px 28px 24px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}.detail-block{display:flex;flex-direction:column;gap:6px}.detail-block h4{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);font-weight:600;margin-bottom:2px}.detail-block p{font-size:.8rem;color:var(--text-secondary);line-height:1.6}.detail-block .mono{font-family:var(--mono);font-size:.75rem;color:var(--text-muted)}.qc-item{display:flex;gap:6px;align-items:flex-start;padding:3px 0}.qc-item .dot{width:5px;height:5px;border-radius:50%;background:var(--yellow);margin-top:6px;flex-shrink:0}.qc-item.resolved .dot{background:var(--green)}.qc-item span{font-size:.76rem;color:var(--yellow)}.qc-item.resolved span{color:var(--green)}
+
+.expand-btn{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;padding:4px;border-radius:4px;transition:all .15s;line-height:1;font-family:var(--font)}.expand-btn:hover{color:var(--text);background:var(--surface3)}.expand-btn.open{transform:rotate(90deg);color:var(--accent)}
+
+.methodology{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-top:40px}
+.methodology h3{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:16px;letter-spacing:-.01em}
+.methodology p{font-size:.78rem;color:var(--text-secondary);line-height:1.7;margin-bottom:12px}
+.methodology .tag{display:inline-block;background:var(--surface3);border:1px solid var(--border);border-radius:4px;padding:2px 8px;font-size:.66rem;color:var(--text-muted);font-family:var(--mono);margin:2px 2px}
+.methodology .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.methodology .skill-group h4{font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:8px;font-weight:600}
+.methodology .skill-group ul{list-style:none;padding:0}
+.methodology .skill-group li{font-size:.74rem;color:var(--text-secondary);padding:3px 0;padding-left:14px;position:relative}
+.methodology .skill-group li::before{content:'→';position:absolute;left:0;color:var(--text-muted);font-size:.68rem}
+
+.footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}.footer-text{font-size:.68rem;color:var(--text-muted)}.footer a{color:var(--accent);text-decoration:none}.footer a:hover{text-decoration:underline}
+
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 2s infinite;margin-right:6px}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+@media(max-width:900px){.app{padding:16px}.detail-inner{grid-template-columns:1fr}.stats{gap:8px}.stat{min-width:100px;padding:12px 14px}.search{width:100%}.header{flex-direction:column;align-items:flex-start;gap:12px}.context-banner{flex-direction:column;align-items:flex-start}.methodology .skills-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="context-banner">
+    <div class="context-banner-text">
+      <div class="context-banner-title">Tyler Smith — Catalog & Rights Tracker</div>
+    </div>
+    <div class="context-banner-badge">Work Sample</div>
+  </div>
+
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">Depalma House Records</div>
+      <div class="title">Catalog & Rights Tracker</div>
+      <div class="subtitle">Tyler Smith, General Manager · <span class="live-dot"></span>Live from Google Sheets</div>
+    </div>
+    <div class="header-right">
+      <div class="last-sync" id="sync-time"></div>
+      <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+    </div>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="toolbar">
+    <div class="search-wrap"><input type="text" class="search" placeholder="Search tracks, artists, ISRCs, writers..." id="search"></div>
+    <div id="filter-buttons" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+  </div>
+
+  <div class="table-wrap"><div class="table-scroll">
+    <table>
+      <thead><tr>
+        <th style="width:36px">#</th><th>Track</th><th>Artist</th><th>Songwriters</th><th>Producer</th><th>Label (Distributor → Corrected)</th><th>ISRC</th><th>Sync</th><th style="width:40px">QC</th><th style="width:36px"></th>
+      </tr></thead>
+      <tbody id="catalog-body">
+        <tr><td colspan="10"><div class="loading"><div class="loading-spinner"></div><div class="loading-text">Connecting to Google Sheets...</div></div></td></tr>
+      </tbody>
+    </table>
+  </div></div>
+
+  <div class="methodology">
+    <h3>About This Tracker</h3>
+    <p>Cross-referenced Spotify metadata, DistroKid, and UnitedMasters distributor records against internal deal docs. QC flags track label name mismatches, missing credits, and songwriter gaps — corrected values sit alongside originals so nothing gets lost.</p>
+    <p style="margin-top:8px;font-size:.72rem;color:var(--text-muted)">Full workbook with deal summary and workflow tabs available on request.</p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">Depalma House Records · Arts and Entertainment Company, LLC · Los Angeles, CA</div>
+    
+    <div class="footer-text">Tyler Smith · Licensed Attorney (NY Bar, In Good Standing) · tyler@depalmahouse.com</div>
+  </div>
+</div>
+
+<script>
+/* ─── CONFIG ───
+   To connect: Import the .xlsx → Google Sheets → File → Share → Publish to web → CSV
+   Paste published CSV URL below */
+
+const SHEET_CSV = `https://docs.google.com/spreadsheets/d/e/2PACX-1vQSeGP-iNTHBr6B4ILSHcNlMndu82wXqcXp33jtidSmHMlEBoTa-BpWiwQKhj-Opef13dWRcwmIY3th/pub?output=csv`;
+const PROXIES = [
+  SHEET_CSV, // direct (works from local file or same-origin)
+  'https://corsproxy.io/?' + encodeURIComponent(SHEET_CSV),
+  'https://api.allorigins.win/raw?url=' + encodeURIComponent(SHEET_CSV),
+];
+// sheet link disabled for published view
+
+const C = {
+  num:'#', title:'Track Title', artist:'Primary Artist',
+  performed:'Performed By (Spotify)', writers:'Songwriters (Spotify)',
+  producer:'Producer (Spotify)', producerFix:'Producer (Corrected)',
+  source:'Source Label (Distributor)', sourceFix:'Source Label (Corrected)',
+  isrc:'ISRC', upc:'UPC', releaseDate:'Release Date',
+  distributor:'Distributor',
+  type:'Release Type', genre:'Genre',
+  agreement:'Agreement Status', sync:'Sync Available',
+  flags:'QC Flags / Notes'
+};
+let catalog=[], activeFilter='all', searchTerm='';
+
+function parseCSV(text){
+  const rows=[];let row=[],cell='',inQ=false;
+  for(let i=0;i<text.length;i++){const c=text[i];if(c==='"'){if(inQ&&text[i+1]==='"'){cell+='"';i++}else inQ=!inQ}else if(c===','&&!inQ){row.push(cell.trim());cell=''}else if((c==='\n'||c==='\r')&&!inQ){row.push(cell.trim());cell='';if(row.some(x=>x))rows.push(row);row=[];if(c==='\r'&&text[i+1]==='\n')i++}else cell+=c}
+  row.push(cell.trim());if(row.some(x=>x))rows.push(row);return rows;
+}
+function mapRow(h,v){const o={};h.forEach((k,i)=>{o[k]=(v[i]||'').trim()});return o}
+
+async function loadData(){
+  const tb=document.getElementById('catalog-body');
+  tb.innerHTML='<tr><td colspan="10"><div class="loading"><div class="loading-spinner"></div><div class="loading-text">Fetching from Google Sheets...</div></div></td></tr>';
+  try{
+    let t=null;
+    for(const url of PROXIES){try{const r=await fetch(url);if(r.ok){t=await r.text();if(t&&t.length>50)break;t=null}}catch(e){continue}}
+    if(!t)throw new Error('Could not reach Google Sheets — try opening in a browser with internet access');const rows=parseCSV(t);if(rows.length<2)throw new Error('No data');
+    let headerIdx=0;
+    for(let i=0;i<rows.length;i++){if(rows[i][0]&&rows[i][0].trim()==='#'){headerIdx=i;break}}
+    catalog=rows.slice(headerIdx+1).map(r=>mapRow(rows[headerIdx],r)).filter(r=>r[C.title]);
+    document.getElementById('sync-time').textContent='Synced '+new Date().toLocaleTimeString();
+    buildFilters();updateStats();render();
+  }catch(e){
+    tb.innerHTML='<tr><td colspan="10"><div class="error-msg">⚠ '+e.message+'<br><br>To connect: Import .xlsx → Google Sheets → File → Share → Publish to web → CSV<br>Then update SHEET_CSV in this file</div></td></tr>';
+  }
+}
+
+function buildFilters(){
+  const ct={};catalog.forEach(t=>{const a=t[C.artist];ct[a]=(ct[a]||0)+1});
+  const dist={};catalog.forEach(t=>{const d=t[C.distributor];if(d)dist[d]=(dist[d]||0)+1});
+  const fs=[
+    {k:'all',l:'All'},
+    {k:'flag',l:'⚠ Flagged'},
+    {k:'sync-no',l:'Sync Blocked'},
+    {k:'label-fix',l:'Label Fix'},
+    {k:'unreleased',l:'Pipeline'}
+  ];
+  Object.entries(dist).sort((a,b)=>b[1]-a[1]).forEach(([n])=>fs.push({k:'dist:'+n,l:n}));
+  Object.entries(ct).sort((a,b)=>b[1]-a[1]).slice(0,5).forEach(([n])=>fs.push({k:n,l:n}));
+  const el=document.getElementById('filter-buttons');
+  el.innerHTML=fs.map(f=>`<button class="filter-btn${f.k==='all'?' active':''}" data-filter="${f.k}">${f.l}</button>`).join('');
+  el.querySelectorAll('.filter-btn').forEach(b=>{
+    b.addEventListener('click',()=>{
+      el.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');activeFilter=b.dataset.filter;render();
+    });
+  });
+}
+
+function updateStats(){
+  const n=catalog.length;
+  const released=catalog.filter(t=>t[C.type]!=='Unreleased').length;
+  const pipeline=n-released;
+  const ic=catalog.filter(t=>t[C.isrc]).length;
+  const syncYes=catalog.filter(t=>t[C.sync]==='Yes').length;
+  const syncNo=catalog.filter(t=>t[C.sync]&&t[C.sync].startsWith('No')).length;
+  const fl=catalog.filter(t=>t[C.flags]&&t[C.flags].includes('⚠')).length;
+  const lf=catalog.filter(t=>t[C.source]&&t[C.sourceFix]&&t[C.source]!==t[C.sourceFix]).length;
+  document.getElementById('stats').innerHTML=`
+    <div class="stat"><div class="stat-value">${n}</div><div class="stat-label">Catalog</div></div>
+    <div class="stat stat--good"><div class="stat-value">${ic}/${released}</div><div class="stat-label">ISRCs Verified</div></div>
+    <div class="stat"><div class="stat-value">${syncYes}</div><div class="stat-label">Sync Ready</div></div>
+    <div class="stat${syncNo?' stat--red':''}"><div class="stat-value">${syncNo}</div><div class="stat-label">Sync Blocked</div></div>
+    <div class="stat${lf?' stat--alert':''}"><div class="stat-value">${lf}</div><div class="stat-label">Label Fixes</div></div>
+    <div class="stat${fl?' stat--alert':''}"><div class="stat-value">${fl}</div><div class="stat-label">QC Flags</div></div>
+    <div class="stat"><div class="stat-value">${pipeline}</div><div class="stat-label">Pipeline</div></div>`;
+}
+
+function render(){
+  const tb=document.getElementById('catalog-body');
+  const f=catalog.filter(t=>{
+    if(activeFilter==='flag'&&!(t[C.flags]&&t[C.flags].includes('⚠')))return false;
+    if(activeFilter==='sync-no'&&!(t[C.sync]&&t[C.sync].startsWith('No')))return false;
+    if(activeFilter==='label-fix'&&!(t[C.source]&&t[C.sourceFix]&&t[C.source]!==t[C.sourceFix]))return false;
+    if(activeFilter==='unreleased'&&t[C.type]!=='Unreleased')return false;
+    if(activeFilter.startsWith('dist:')&&t[C.distributor]!==activeFilter.slice(5))return false;
+    if(!activeFilter.startsWith('dist:')&&activeFilter!=='all'&&activeFilter!=='flag'&&activeFilter!=='sync-no'&&activeFilter!=='label-fix'&&activeFilter!=='unreleased'&&t[C.artist]!==activeFilter)return false;
+    if(searchTerm){const s=searchTerm.toLowerCase();return[t[C.title],t[C.artist],t[C.writers],t[C.performed],t[C.producer],t[C.isrc],t[C.upc],t[C.flags],t[C.distributor]].join(' ').toLowerCase().includes(s)}
+    return true;
+  });
+  if(!f.length){tb.innerHTML='<tr><td colspan="10" style="text-align:center;padding:40px;color:var(--text-muted)">No matching tracks</td></tr>';return}
+  tb.innerHTML=f.map((t,i)=>{
+    const num=t[C.num]||(i+1);
+    const hf=!!(t[C.flags]&&t[C.flags].includes('⚠'));
+    const hp=t[C.producerFix]&&t[C.producer]&&t[C.producerFix]!==t[C.producer]&&t[C.producer]==='–';
+    const hs=t[C.source]&&t[C.sourceFix]&&t[C.source]!==t[C.sourceFix];
+    const isUnreleased=t[C.type]==='Unreleased';
+
+    const pd=hp?`<span class="stale">${t[C.producer]}</span> <span class="corrected">${t[C.producerFix]}</span>`:(t[C.producerFix]||t[C.producer]||'<span style="color:var(--text-muted)">–</span>');
+    const sd=hs?`<span class="stale">${t[C.source]}</span><br><span class="corrected">${t[C.sourceFix]}</span>`:(t[C.sourceFix]||t[C.source]||'<span style="color:var(--text-muted)">–</span>');
+    const wr=t[C.writers]||'<span style="color:var(--text-muted);font-style:italic">pending</span>';
+    const ir=t[C.isrc]?`<span style="color:var(--green);font-family:var(--mono);font-size:.72rem">${t[C.isrc]}</span>`:'<span style="color:var(--text-muted)">—</span>';
+
+    // Sync badge
+    let syncBadge='';
+    if(t[C.sync]==='Yes') syncBadge='<span class="badge badge--sync">SYNC ✓</span>';
+    else if(t[C.sync]&&t[C.sync].startsWith('No')) syncBadge='<span class="badge badge--nosync">BLOCKED</span>';
+    else if(t[C.sync]==='Pending clearance') syncBadge='<span class="badge badge--pending">PENDING</span>';
+    else syncBadge='<span class="badge badge--gray">—</span>';
+
+    // Type/meta line
+    const metaParts=[t[C.type],t[C.genre],t[C.distributor],t[C.releaseDate]].filter(Boolean);
+    const fd=hf?'<span class="flag-dot flag-dot--warn"></span>':'<span class="flag-dot flag-dot--ok"></span>';
+
+    const flagsRaw=t[C.flags]||'';
+    const fi=flagsRaw.split(/[;•]/).map(x=>x.trim()).filter(Boolean);
+    const u='r'+i;
+
+    return`<tr class="row" data-uid="${u}"><td class="col-num">${num}</td><td class="col-title"><div class="track-title">${t[C.title]}<span>${metaParts.join(' · ')}</span></div></td><td class="col-artist">${t[C.artist]||''}</td><td class="col-writers">${wr}</td><td class="col-producer">${pd}</td><td class="col-source">${sd}</td><td class="col-isrc">${ir}</td><td>${syncBadge}</td><td class="col-flags">${fd}</td><td class="col-expand"><button class="expand-btn" onclick="toggleDetail('${u}')">›</button></td></tr>
+    <tr class="detail-row" id="detail-${u}"><td colspan="10"><div class="detail-inner">
+      <div class="detail-block"><h4>Performed By</h4><p>${t[C.performed]||'—'}</p><h4 style="margin-top:14px">Songwriters</h4><p>${t[C.writers]||'<em style="color:var(--text-muted)">Not documented</em>'}</p><h4 style="margin-top:14px">Release</h4><p>${t[C.releaseDate]||'—'}${t[C.distributor]?' · via '+t[C.distributor]:''}</p></div>
+      <div class="detail-block"><h4>Producer</h4><p>${t[C.producer]||'–'}${hp?'<br><span class="correction">→ Correct: '+t[C.producerFix]+'</span>':''}</p><h4 style="margin-top:14px">Label (Distributor)</h4><p style="font-size:.78rem">${t[C.source]||'–'}${hs?'<br><span class="correction">→ Correct: '+t[C.sourceFix]+'</span>':''}</p><h4 style="margin-top:14px">ISRC</h4><p class="mono">${t[C.isrc]||'Not logged'}</p><h4 style="margin-top:14px">UPC</h4><p class="mono">${t[C.upc]||'Not logged'}</p></div>
+      <div class="detail-block"><h4>Agreement</h4><p>${t[C.agreement]||'—'}</p><h4 style="margin-top:14px">Sync</h4><p>${t[C.sync]||'—'}</p><h4 style="margin-top:14px">QC Flags</h4>${fi.length?fi.map(x=>'<div class="qc-item'+(x.startsWith('✅')?' resolved':'')+'"><div class="dot"></div><span>'+x+'</span></div>').join(''):'<p style="color:var(--green);font-size:.78rem">✓ No issues</p>'}</div>
+    </div></td></tr>`}).join('');
+}
+
+function toggleDetail(u){
+  const r=document.getElementById('detail-'+u);
+  const b=document.querySelector('[data-uid="'+u+'"] .expand-btn');
+  if(r&&b){r.classList.toggle('open');b.classList.toggle('open')}
+}
+document.getElementById('search').addEventListener('input',e=>{searchTerm=e.target.value;render()});
+loadData();
+</script>
+</body>
+</html>
