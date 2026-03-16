@@ -39,6 +39,9 @@ html{font-size:15px;-webkit-font-smoothing:antialiased}body{background:var(--bg)
 
 .detail-row{display:none}.detail-row.open{display:table-row}.detail-row td{background:var(--surface2);padding:0;border-bottom:1px solid var(--border)}.detail-inner{padding:20px 28px 24px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px}.detail-block{display:flex;flex-direction:column;gap:6px}.detail-block h4{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);font-weight:600;margin-bottom:2px}.detail-block p{font-size:.8rem;color:var(--text-secondary);line-height:1.6}.detail-block .mono{font-family:var(--mono);font-size:.75rem;color:var(--text-muted)}.qc-item{display:flex;gap:6px;align-items:flex-start;padding:3px 0}.qc-item .dot{width:5px;height:5px;border-radius:50%;background:var(--yellow);margin-top:6px;flex-shrink:0}.qc-item.resolved .dot{background:var(--green)}.qc-item span{font-size:.76rem;color:var(--yellow)}.qc-item.resolved span{color:var(--green)}
 
+th.sortable{cursor:pointer;user-select:none;transition:color .15s}th.sortable:hover{color:var(--text)}th.sortable.active-sort{color:var(--accent)}.sort-arrow{font-size:.55rem;opacity:.3;margin-left:2px}.active-sort .sort-arrow{opacity:1;color:var(--accent)}
+.col-date{min-width:90px;font-family:var(--mono);font-size:.72rem;white-space:nowrap}
+
 .expand-btn{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;padding:4px;border-radius:4px;transition:all .15s;line-height:1;font-family:var(--font)}.expand-btn:hover{color:var(--text);background:var(--surface3)}.expand-btn.open{transform:rotate(90deg);color:var(--accent)}
 
 .methodology{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-top:40px}
@@ -86,14 +89,13 @@ html{font-size:15px;-webkit-font-smoothing:antialiased}body{background:var(--bg)
     <div class="search-wrap"><input type="text" class="search" placeholder="Search tracks, artists, ISRCs, writers..." id="search"></div>
     <div id="filter-buttons" style="display:flex;gap:8px;flex-wrap:wrap"></div>
   </div>
-
   <div class="table-wrap"><div class="table-scroll">
     <table>
-      <thead><tr>
-        <th style="width:36px">#</th><th>Track</th><th>Artist</th><th>Songwriters</th><th>Producer</th><th>Label (Distributor → Corrected)</th><th>ISRC</th><th>Sync</th><th style="width:40px">QC</th><th style="width:36px"></th>
+      <thead><tr id="thead-row">
+        <th class="sortable" data-sort="num" style="width:36px"># <span class="sort-arrow">▲</span></th><th class="sortable" data-sort="title">Track <span class="sort-arrow"></span></th><th class="sortable" data-sort="artist">Artist <span class="sort-arrow"></span></th><th>Songwriters</th><th class="sortable" data-sort="producer">Producer <span class="sort-arrow"></span></th><th>Label (Distributor → Corrected)</th><th>ISRC</th><th class="sortable" data-sort="date">Released <span class="sort-arrow"></span></th><th>Sync</th><th style="width:40px">QC</th><th style="width:36px"></th>
       </tr></thead>
       <tbody id="catalog-body">
-        <tr><td colspan="10"><div class="loading"><div class="loading-spinner"></div><div class="loading-text">Connecting to Google Sheets...</div></div></td></tr>
+        <tr><td colspan="11"><div class="loading"><div class="loading-spinner"></div><div class="loading-text">Connecting to Google Sheets...</div></div></td></tr>
       </tbody>
     </table>
   </div></div>
@@ -135,7 +137,7 @@ const C = {
   agreement:'Agreement Status', sync:'Sync Available',
   flags:'QC Flags / Notes'
 };
-let catalog=[], activeFilter='all', searchTerm='';
+let catalog=[], activeFilter='all', searchTerm='', activeSort='num', sortDir=1; // 1=asc, -1=desc
 
 function parseCSV(text){
   const rows=[];let row=[],cell='',inQ=false;
@@ -146,7 +148,7 @@ function mapRow(h,v){const o={};h.forEach((k,i)=>{o[k]=(v[i]||'').trim()});retur
 
 async function loadData(){
   const tb=document.getElementById('catalog-body');
-  tb.innerHTML='<tr><td colspan="10"><div class="loading"><div class="loading-spinner"></div><div class="loading-text">Fetching from Google Sheets...</div></div></td></tr>';
+  tb.innerHTML='<tr><td colspan="11"><div class="loading"><div class="loading-spinner"></div><div class="loading-text">Fetching from Google Sheets...</div></div></td></tr>';
   try{
     let t=null;
     for(const url of PROXIES){try{const r=await fetch(url);if(r.ok){t=await r.text();if(t&&t.length>50)break;t=null}}catch(e){continue}}
@@ -157,7 +159,7 @@ async function loadData(){
     document.getElementById('sync-time').textContent='Synced '+new Date().toLocaleTimeString();
     buildFilters();updateStats();render();
   }catch(e){
-    tb.innerHTML='<tr><td colspan="10"><div class="error-msg">⚠ '+e.message+'<br><br>To connect: Import .xlsx → Google Sheets → File → Share → Publish to web → CSV<br>Then update SHEET_CSV in this file</div></td></tr>';
+    tb.innerHTML='<tr><td colspan="11"><div class="error-msg">⚠ '+e.message+'<br><br>To connect: Import .xlsx → Google Sheets → File → Share → Publish to web → CSV<br>Then update SHEET_CSV in this file</div></td></tr>';
   }
 }
 
@@ -214,7 +216,17 @@ function render(){
     if(searchTerm){const s=searchTerm.toLowerCase();return[t[C.title],t[C.artist],t[C.writers],t[C.performed],t[C.producer],t[C.isrc],t[C.upc],t[C.flags],t[C.distributor]].join(' ').toLowerCase().includes(s)}
     return true;
   });
-  if(!f.length){tb.innerHTML='<tr><td colspan="10" style="text-align:center;padding:40px;color:var(--text-muted)">No matching tracks</td></tr>';return}
+  // Sort
+  f.sort((a,b)=>{
+    let v=0;
+    if(activeSort==='num') v=(parseInt(a[C.num])||9999)-(parseInt(b[C.num])||9999);
+    else if(activeSort==='date'){const da=a[C.releaseDate]?new Date(a[C.releaseDate]):new Date(0);const db=b[C.releaseDate]?new Date(b[C.releaseDate]):new Date(0);v=da-db;}
+    else if(activeSort==='title') v=(a[C.title]||'').localeCompare(b[C.title]||'');
+    else if(activeSort==='artist') v=(a[C.artist]||'').localeCompare(b[C.artist]||'');
+    else if(activeSort==='producer') v=(a[C.producerFix]||a[C.producer]||'').localeCompare(b[C.producerFix]||b[C.producer]||'');
+    return v*sortDir;
+  });
+  if(!f.length){tb.innerHTML='<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--text-muted)">No matching tracks</td></tr>';return}
   tb.innerHTML=f.map((t,i)=>{
     const num=t[C.num]||(i+1);
     const hf=!!(t[C.flags]&&t[C.flags].includes('⚠'));
@@ -242,13 +254,30 @@ function render(){
     const fi=flagsRaw.split(/[;•]/).map(x=>x.trim()).filter(Boolean);
     const u='r'+i;
 
-    return`<tr class="row" data-uid="${u}"><td class="col-num">${num}</td><td class="col-title"><div class="track-title">${t[C.title]}<span>${metaParts.join(' · ')}</span></div></td><td class="col-artist">${t[C.artist]||''}</td><td class="col-writers">${wr}</td><td class="col-producer">${pd}</td><td class="col-source">${sd}</td><td class="col-isrc">${ir}</td><td>${syncBadge}</td><td class="col-flags">${fd}</td><td class="col-expand"><button class="expand-btn" onclick="toggleDetail('${u}')">›</button></td></tr>
-    <tr class="detail-row" id="detail-${u}"><td colspan="10"><div class="detail-inner">
+    const dateDisplay=t[C.releaseDate]||'<span style="color:var(--text-muted)">—</span>';
+
+    return`<tr class="row" data-uid="${u}"><td class="col-num">${num}</td><td class="col-title"><div class="track-title">${t[C.title]}<span>${metaParts.join(' · ')}</span></div></td><td class="col-artist">${t[C.artist]||''}</td><td class="col-writers">${wr}</td><td class="col-producer">${pd}</td><td class="col-source">${sd}</td><td class="col-isrc">${ir}</td><td class="col-date">${dateDisplay}</td><td>${syncBadge}</td><td class="col-flags">${fd}</td><td class="col-expand"><button class="expand-btn" onclick="toggleDetail('${u}')">›</button></td></tr>
+    <tr class="detail-row" id="detail-${u}"><td colspan="11"><div class="detail-inner">
       <div class="detail-block"><h4>Performed By</h4><p>${t[C.performed]||'—'}</p><h4 style="margin-top:14px">Songwriters</h4><p>${t[C.writers]||'<em style="color:var(--text-muted)">Not documented</em>'}</p><h4 style="margin-top:14px">Release</h4><p>${t[C.releaseDate]||'—'}${t[C.distributor]?' · via '+t[C.distributor]:''}</p></div>
       <div class="detail-block"><h4>Producer</h4><p>${t[C.producer]||'–'}${hp?'<br><span class="correction">→ Correct: '+t[C.producerFix]+'</span>':''}</p><h4 style="margin-top:14px">Label (Distributor)</h4><p style="font-size:.78rem">${t[C.source]||'–'}${hs?'<br><span class="correction">→ Correct: '+t[C.sourceFix]+'</span>':''}</p><h4 style="margin-top:14px">ISRC</h4><p class="mono">${t[C.isrc]||'Not logged'}</p><h4 style="margin-top:14px">UPC</h4><p class="mono">${t[C.upc]||'Not logged'}</p></div>
       <div class="detail-block"><h4>Agreement</h4><p>${t[C.agreement]||'—'}</p><h4 style="margin-top:14px">Sync</h4><p>${t[C.sync]||'—'}</p><h4 style="margin-top:14px">QC Flags</h4>${fi.length?fi.map(x=>'<div class="qc-item'+(x.startsWith('✅')?' resolved':'')+'"><div class="dot"></div><span>'+x+'</span></div>').join(''):'<p style="color:var(--green);font-size:.78rem">✓ No issues</p>'}</div>
     </div></td></tr>`}).join('');
 }
+
+function setSort(col){
+  if(activeSort===col){sortDir*=-1}else{activeSort=col;sortDir=col==='date'?-1:1}
+  document.querySelectorAll('#thead-row th.sortable').forEach(th=>{
+    const s=th.dataset.sort;
+    th.classList.toggle('active-sort',s===activeSort);
+    const arrow=th.querySelector('.sort-arrow');
+    if(arrow) arrow.textContent=s===activeSort?(sortDir===1?'▲':'▼'):'';
+  });
+  render();
+}
+// Attach click handlers to sortable headers
+document.querySelectorAll('#thead-row th.sortable').forEach(th=>{
+  th.addEventListener('click',()=>setSort(th.dataset.sort));
+});
 
 function toggleDetail(u){
   const r=document.getElementById('detail-'+u);
