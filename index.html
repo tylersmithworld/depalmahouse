@@ -36,18 +36,22 @@
         padding: 0 !important;
       }
       .entry {
+        display: flex !important;
+        flex-direction: column !important;
         margin-bottom: 0.75rem !important;
-        padding: 0 !important;
+        gap: 0.25rem !important;
       }
-      .entry-artwork {
-        margin-bottom: 0.25rem !important;
-      }
-      .entry-info {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0 !important;
+      .entry-secondary {
+        display: flex;
+        flex-direction: row;
+        gap: 0.4rem;
+        align-items: baseline;
         margin: 0 !important;
         padding: 0 !important;
+        line-height: 1.3;
+      }
+      .entry-artwork {
+        margin: 0 !important;
       }
       .entry-primary {
         margin: 0 !important;
@@ -63,24 +67,10 @@
         padding: 0 !important;
         line-height: 1.3;
       }
-      .entry-secondary {
-        text-align: left;
-        display: flex;
-        gap: 0.4rem;
-        align-items: baseline;
-        margin: 0 !important;
-        margin-bottom: 0.25rem !important;
-        padding: 0 !important;
-        line-height: 1.3;
-        order: -1;
-      }
       .entry-type,
       .entry-date {
         margin: 0 !important;
         padding: 0 !important;
-      }
-      .entry-date {
-        order: -1;
       }
       .entry-date::after {
         content: '·';
@@ -118,6 +108,10 @@
     /* Entries - full width art */
     .entry {
       margin-bottom: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      gap: 0.75rem 1rem;
     }
 
     .entry:last-child {
@@ -127,7 +121,8 @@
     .entry-artwork {
       display: block;
       width: 100%;
-      margin-bottom: 0.75rem;
+      grid-column: 1 / -1;
+      grid-row: 1;
     }
 
     .entry-artwork img {
@@ -135,15 +130,18 @@
       display: block;
     }
 
-    .entry-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 1rem;
+    .entry-primary {
+      grid-column: 1;
+      grid-row: 2;
     }
 
-    .entry-primary {
-      flex: 1;
+    .entry-secondary {
+      grid-column: 2;
+      grid-row: 2;
+      display: flex;
+      gap: 0;
+      flex-direction: column;
+      align-items: flex-end;
     }
 
     .entry-title {
@@ -166,11 +164,6 @@
       font-size: 0.875rem;
       font-weight: 400;
       color: #666;
-    }
-
-    .entry-secondary {
-      text-align: right;
-      flex-shrink: 0;
     }
 
     .entry-num {
@@ -714,18 +707,16 @@
             const thumb = `https://img.youtube.com/vi/${item.youtube}/maxresdefault.jpg`;
             html += `
               <article class="entry" id="${item.id}">
+                <div class="entry-secondary">
+                  <div class="entry-date">${formatDate(item.date)}</div>
+                  <div class="entry-type">${item.type}</div>
+                </div>
                 <a class="entry-artwork video-thumb" href="${item.link}" target="_blank" rel="noopener">
                   <img src="${thumb}" alt="${item.title}" loading="lazy">
                 </a>
-                <div class="entry-info">
-                  <div class="entry-primary">
-                    <div class="entry-title"><a href="${item.link}" target="_blank">${item.title}</a></div>
-                    <div class="entry-artist">${item.artist}</div>
-                  </div>
-                  <div class="entry-secondary">
-                    <div class="entry-type">${item.type}</div>
-                    <div class="entry-date">${formatDate(item.date)}</div>
-                  </div>
+                <div class="entry-primary">
+                  <div class="entry-title"><a href="${item.link}" target="_blank">${item.title}</a></div>
+                  <div class="entry-artist">${item.artist}</div>
                 </div>
               </article>
             `;
@@ -733,18 +724,16 @@
             // Instagram thumbnail with play button
             html += `
               <article class="entry" id="${item.id}">
+                <div class="entry-secondary">
+                  <div class="entry-date">${formatDate(item.date)}</div>
+                  <div class="entry-type">${item.type || ''}</div>
+                </div>
                 <a class="entry-artwork ig-thumb${item.cropped ? ' cropped' : ''}" href="${item.link}" target="_blank" rel="noopener">
                   <img src="${item.art}" alt="${item.title || 'Instagram Reel'}" loading="lazy">
                 </a>
-                <div class="entry-info">
-                  <div class="entry-primary">
-                    <div class="entry-title"><a href="${item.link}" target="_blank">${item.title || 'Reel'}</a></div>
-                    <div class="entry-artist">${item.artist || ''}</div>
-                  </div>
-                  <div class="entry-secondary">
-                    <div class="entry-type">${item.type || ''}</div>
-                    <div class="entry-date">${formatDate(item.date)}</div>
-                  </div>
+                <div class="entry-primary">
+                  <div class="entry-title"><a href="${item.link}" target="_blank">${item.title || 'Reel'}</a></div>
+                  <div class="entry-artist">${item.artist || ''}</div>
                 </div>
               </article>
             `;
@@ -765,20 +754,18 @@
 
             html += `
               <article class="entry" id="${item.id}">
+                <div class="entry-secondary">
+                  <div class="entry-date">${formatDate(item.date)}</div>
+                  <div class="entry-type">${item.type}</div>
+                </div>
                 <a class="entry-artwork${item.cropped ? ' cropped' : ''}" href="${item.link || '#'}" target="_blank" rel="noopener" ${!item.link ? 'style="pointer-events:none"' : ''}>
                   <img src="${item.art}" alt="${item.title}" loading="lazy">
                 </a>
-                <div class="entry-info">
-                  <div class="entry-primary">
-                    <div class="entry-title">${item.link ? `<a href="${item.link}" target="_blank">${item.title}</a>` : item.title}</div>
-                    <div class="entry-artist">${artistLine}</div>
-                    ${metaLine ? `<div class="entry-meta">${metaLine}</div>` : ''}
-                    ${tracklistHTML}
-                  </div>
-                  <div class="entry-secondary">
-                    <div class="entry-type">${item.type}</div>
-                    <div class="entry-date">${formatDate(item.date)}</div>
-                  </div>
+                <div class="entry-primary">
+                  <div class="entry-title">${item.link ? `<a href="${item.link}" target="_blank">${item.title}</a>` : item.title}</div>
+                  <div class="entry-artist">${artistLine}</div>
+                  ${metaLine ? `<div class="entry-meta">${metaLine}</div>` : ''}
+                  ${tracklistHTML}
                 </div>
               </article>
             `;
@@ -786,15 +773,13 @@
             // Text only (no art)
             html += `
               <article class="entry" id="${item.id}">
-                <div class="entry-info">
-                  <div class="entry-primary">
-                    <div class="entry-title">${item.link ? `<a href="${item.link}" target="_blank">${item.title}</a>` : item.title}</div>
-                    <div class="entry-artist">${item.artist}</div>
-                  </div>
-                  <div class="entry-secondary">
-                    <div class="entry-type">${item.type}</div>
-                    <div class="entry-date">${formatDate(item.date)}</div>
-                  </div>
+                <div class="entry-secondary">
+                  <div class="entry-date">${formatDate(item.date)}</div>
+                  <div class="entry-type">${item.type}</div>
+                </div>
+                <div class="entry-primary">
+                  <div class="entry-title">${item.link ? `<a href="${item.link}" target="_blank">${item.title}</a>` : item.title}</div>
+                  <div class="entry-artist">${item.artist}</div>
                 </div>
               </article>
             `;
