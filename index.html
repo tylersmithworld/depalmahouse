@@ -38,6 +38,17 @@
       }
       .entry-secondary {
         text-align: left;
+        display: flex;
+        gap: 0.5rem;
+        align-items: baseline;
+      }
+      .entry-date {
+        margin-top: 0;
+      }
+      .entry-secondary .entry-type::after {
+        content: '·';
+        margin-left: 0.5rem;
+        color: #ccc;
       }
     }
 
