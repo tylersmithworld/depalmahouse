@@ -140,6 +140,13 @@
       letter-spacing: 0.05em;
     }
 
+    .entry-date {
+      font-size: 0.65rem;
+      color: #bbb;
+      margin-top: 0.25rem;
+      font-variant-numeric: tabular-nums;
+    }
+
     .entry-meta {
       font-size: 0.75rem;
       color: #999;
@@ -659,6 +666,12 @@
       return groups;
     }
 
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+    }
+
     function render() {
       const container = document.getElementById('catalog');
       const byYear = groupByYear(catalog);
@@ -685,6 +698,7 @@
                   </div>
                   <div class="entry-secondary">
                     <div class="entry-type">${item.type}</div>
+                    <div class="entry-date">${formatDate(item.date)}</div>
                   </div>
                 </div>
               </article>
@@ -703,6 +717,7 @@
                   </div>
                   <div class="entry-secondary">
                     <div class="entry-type">${item.type || ''}</div>
+                    <div class="entry-date">${formatDate(item.date)}</div>
                   </div>
                 </div>
               </article>
@@ -736,6 +751,7 @@
                   </div>
                   <div class="entry-secondary">
                     <div class="entry-type">${item.type}</div>
+                    <div class="entry-date">${formatDate(item.date)}</div>
                   </div>
                 </div>
               </article>
@@ -751,6 +767,7 @@
                   </div>
                   <div class="entry-secondary">
                     <div class="entry-type">${item.type}</div>
+                    <div class="entry-date">${formatDate(item.date)}</div>
                   </div>
                 </div>
               </article>
