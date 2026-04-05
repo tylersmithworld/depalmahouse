@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalog — Depalma House Records</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #F5F5F0;
+      color: #1a1a1a;
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 2rem 1.25rem;
+      }
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 0.75rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #999;
+    }
+
+    /* Year sections */
+    .year-section {
+      margin-bottom: 3rem;
+    }
+
+    .year-label {
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: #ccc;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    /* Entries - full width art */
+    .entry {
+      margin-bottom: 2.5rem;
+    }
+
+    .entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-artwork {
+      display: block;
+      width: 100%;
+      margin-bottom: 0.75rem;
+    }
+
+    .entry-artwork img {
+      width: 100%;
+      display: block;
+    }
+
+    .entry-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .entry-primary {
+      flex: 1;
+    }
+
+    .entry-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #1a1a1a;
+      margin-bottom: 0.125rem;
+    }
+
+    .entry-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .entry-title a:hover {
+      text-decoration: underline;
+    }
+
+    .entry-artist {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: #666;
+    }
+
+    .entry-secondary {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .entry-num {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: #bbb;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.02em;
+    }
+
+    .entry-type {
+      font-size: 0.7rem;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .entry-meta {
+      font-size: 0.75rem;
+      color: #999;
+      margin-top: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .entry-meta a {
+      color: #666;
+      text-decoration: none;
+    }
+
+    .entry-meta a:hover {
+      color: #1a1a1a;
+    }
+
+    /* Video thumbnails */
+    .entry-artwork.video-thumb {
+      position: relative;
+    }
+
+    .entry-artwork.video-thumb::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(0,0,0,0.7);
+      border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 28px;
+    }
+
+    .entry-artwork.video-thumb img,
+    .entry-artwork.cropped img {
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Instagram reel thumbnails */
+    .entry-artwork.ig-thumb {
+      position: relative;
+    }
+
+    .entry-artwork.ig-thumb::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background: rgba(0,0,0,0.7);
+      border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 28px;
+    }
+
+    .entry-artwork.ig-thumb img {
+      width: 100%;
+    }
+
+    /* Tracklist - compact */
+    .tracklist {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      color: #888;
+    }
+
+    .track {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.2rem 0;
+    }
+
+    .track-num {
+      color: #bbb;
+      min-width: 1.25rem;
+    }
+
+    .track-title {
+      flex: 1;
+    }
+
+    .track-duration {
+      color: #bbb;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid #e5e5e0;
+      font-size: 0.7rem;
+      color: #bbb;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>depalma.house</h1>
+    </header>
+
+    <main id="catalog"></main>
+
+    <footer class="footer">
+      Los Angeles · Est. 2021
+    </footer>
+  </div>
+
+  <script>
+    const catalog = [
+      // 2026
+      {
+        id: "marco-plus-smino",
+        title: "Out My Way",
+        artist: "Marco Plus & Smino",
+        type: "Filmed at Depalma",
+        display: "video",
+        year: 2026,
+        date: "2026-01-04",
+        youtube: "KLYZY5jnV3k",
+        link: "https://www.youtube.com/watch?v=KLYZY5jnV3k"
+      },
+      // 2025
+      {
+        id: "braxton-reimagined",
+        title: "Braxton Cook \"Come Through and Chill\"",
+        artist: "Grammy's Reimagined",
+        type: "prod by Depalma House",
+        display: "video",
+        year: 2025,
+        date: "2025-10-28",
+        youtube: "95EKxlcf1mI",
+        link: "https://www.youtube.com/watch?v=95EKxlcf1mI"
+      },
+      {
+        id: "smino-nirvana",
+        title: "Maybe In Nirvana (Short Film)",
+        artist: "Smino",
+        type: "Filmed at Depalma",
+        display: "video",
+        year: 2025,
+        date: "2025-07-04",
+        youtube: "E7TBk-zQ2Ck",
+        link: "https://www.youtube.com/watch?v=E7TBk-zQ2Ck"
+      },
+      {
+        id: "charlie-puth-home",
+        title: "Home (feat. Hikaru Utada)",
+        artist: "Charlie Puth",
+        type: "Filmed at Depalma",
+        display: "instagram",
+        cropped: true,
+        year: 2026,
+        date: "2026-03-01",
+        art: "album art/charlie-piano.png",
+        link: "https://www.youtube.com/watch?v=fKsETSl_cyU"
+      },
+      {
+        id: "raceway",
+        title: "RACEWAY",
+        artist: "Simen Sez",
+        featuring: "Haile Supreme, Saxton Chef, Maxwell Hunter",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2025,
+        date: "2025-09-10",
+        art: "album art/Raceway Cover.png",
+        link: "https://open.spotify.com/track/3ChpC7oebmO0pQZ2o7JFhI"
+      },
+      {
+        id: "ig-reel-car",
+        title: "E28 Race Car",
+        artist: "Handpainted Art Car by Zachary B Kahn feat. GucciGhost",
+        type: "Sponsored by Depalma House",
+        display: "instagram",
+        cropped: true,
+        year: 2026,
+        date: "2026-03-15",
+        art: "album art/20260327-P1011665.jpg",
+        link: "https://www.instagram.com/reel/DWo1ceekyLA/"
+      },
+      {
+        id: "ig-reel-studio",
+        title: "The Control Room",
+        artist: "Purpose Built Listening Room in Cherry and Canvas",
+        type: "Depalma House",
+        display: "instagram",
+        year: 2025,
+        date: "2025-02-20",
+        art: "album art/The Control Room - We wanted the best acoustics the space would allow so this room was rebuilt f.jpg",
+        link: "https://www.instagram.com/reel/DTZAJvRgU_7/"
+      },
+      {
+        id: "trs-cable",
+        title: "Depalma Braided Instrument Cable",
+        artist: "Hand soldered 1/4\" TRS with Neutrik connectors",
+        type: "Depalma Cables",
+        display: "art",
+        year: 2025,
+        date: "2025-07-30",
+        art: "album art/trs.jpg",
+        link: "https://www.etsy.com/shop/DepalmaCables"
+      },
+      {
+        id: "lunar-breaks",
+        title: "Lunar Rae Breaks",
+        artist: "Sound Pack",
+        type: "Analog Samples",
+        display: "art",
+        year: 2025,
+        date: "2025-07-23",
+        art: "album art/Lunar breaks art.jpg",
+        link: "https://depalmahouse.gumroad.com/l/mrlkj"
+      },
+      {
+        id: "it-was-saturday",
+        title: "It Was Saturday",
+        artist: "Maxwell Hunter",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2025,
+        date: "2025-06-17",
+        art: "album art/20250529-P1027108.jpg",
+        link: "https://open.spotify.com/track/1O1MFm5XClotDAEu8f2MXL"
+      },
+      {
+        id: "your-friends-neighbors",
+        title: "Your Friends & Neighbors S1E4",
+        artist: "\"Chill\" by Simen Sez & NanaBcool",
+        type: "Apple TV+",
+        display: "art",
+        cropped: true,
+        year: 2025,
+        date: "2025-04-25",
+        art: "album art/Your_Friends_Neighbors_Photo_010312.jpg.photo_modal_show_home_large.jpg",
+        link: "https://tv.apple.com/us/show/your-friends--neighbors/umc.cmc.74o37kzay0yuuub8iumddjsg"
+      },
+      {
+        id: "minutes-from-estonia",
+        title: "Minutes From Estonia",
+        artist: "Simen Sez",
+        featuring: "Saxton Chef, Bryn Bliska, Maxwell Hunter",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2025,
+        date: "2025-05-21",
+        art: "album art/Minutes From Estonia cove art.png",
+        link: "https://open.spotify.com/track/2wtFrUpthyRDnCeYvCw7Od"
+      },
+      {
+        id: "808-pack",
+        title: "Dirty Cassette 808s",
+        artist: "Loops and One Shots with Ampex Delay and Yamaha Cassette Saturation",
+        type: "Analog Samples",
+        display: "art",
+        year: 2025,
+        date: "2025-04-14",
+        art: "album art/808 cover.jpg",
+        link: "https://depalmahouse.gumroad.com/l/urwwjz"
+      },
+      {
+        id: "mogami-snake",
+        title: "Depalma Studio Box",
+        artist: "Audio snake with custom walnut sides",
+        type: "Depalma Cables",
+        display: "art",
+        year: 2025,
+        date: "2025-02-28",
+        art: "album art/snake.png",
+        link: "https://www.etsy.com/shop/DepalmaCables"
+      },
+      {
+        id: "boeingananas",
+        title: "BOEINGANANAS",
+        artist: "Simen Sez",
+        featuring: "Saxton Chef, Bryn Bliska, Maxwell Hunter, S!MONE",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2025,
+        date: "2025-02-06",
+        art: "album art/boeing cover art big.jpg",
+        link: "https://open.spotify.com/track/0O7h7xLodUTBGxjkkTfyvH"
+      },
+      // 2024
+      {
+        id: "understand",
+        title: "Understand",
+        artist: "Lexkoupe",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2024,
+        date: "2024-12-30",
+        art: "album art/Lex Koupe Understand Cover v8.jpg",
+        link: "https://open.spotify.com/track/37bUj3NB0BLgVCAveqNFr7"
+      },
+      {
+        id: "ynot-simen-sez",
+        title: "YNOT SIMEN SEZ?!",
+        artist: "YNOT & Simen Sez",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2024,
+        date: "2024-12-16",
+        art: "album art/ynot-simen-sez-cover.jpg",
+        link: "https://open.spotify.com/album/1L8bW996l9NXvQ3NoDoMe0"
+      },
+      {
+        id: "depalma-radio",
+        title: "Depalma House Radio Episode 1",
+        artist: "DJ mix by GM @tylersmithworld",
+        type: "Depalma House",
+        display: "video",
+        year: 2024,
+        date: "2024-07-08",
+        youtube: "cIpmtwydCBQ",
+        link: "https://www.youtube.com/watch?v=cIpmtwydCBQ"
+      },
+      {
+        id: "cc-me",
+        title: "Cc Me",
+        artist: "YNOT & Simen Sez",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2024,
+        date: "2024-09-30",
+        art: "album art/cc me cover v1.png",
+        link: null
+      },
+      {
+        id: "j4u",
+        title: "J4U",
+        artist: "Simen Sez",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2024,
+        date: "2024-07-10",
+        art: "album art/J4U Cover 1.PNG",
+        link: "https://open.spotify.com/track/1uiix5bSXsBThbyqQbmxEK"
+      },
+      {
+        id: "special-edition-slowed",
+        title: "Special Edition (Slowed + Reverbed)",
+        artist: "Simen Sez",
+        featuring: "Alfred Nomad & Anaïs Cardot",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2024,
+        date: "2024-04-18",
+        art: "album art/Special Edition Cover v13 slow and reverb.PNG",
+        link: "https://open.spotify.com/track/5knkLGNhEbusbv7MIJguuz"
+      },
+      {
+        id: "do-what-you-want",
+        title: "Do What You Want",
+        artist: "Simen Sez",
+        featuring: "Drok & Ian Cole",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2024,
+        date: "2024-03-26",
+        art: "album art/do wat you want.png",
+        link: "https://open.spotify.com/track/7ursrKrSAzTxJMy8bWkMjw"
+      },
+      {
+        id: "check-me-out",
+        title: "Check Me Out",
+        artist: "Simen Sez",
+        featuring: "Drok",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2024,
+        date: "2024-01-31",
+        art: "album art/Check Me Out Cover V1.1.png",
+        link: "https://open.spotify.com/track/36TJ0K106r7i8DmDi21d9V"
+      },
+      // 2023
+      {
+        id: "simen-visualizer",
+        title: "Parks and Rec Visualizer",
+        artist: "Simen Sez",
+        type: "Depalma House Records",
+        display: "video",
+        year: 2023,
+        date: "2023-07-31",
+        youtube: "aTrA8eEBu4Q",
+        link: "https://www.youtube.com/watch?v=aTrA8eEBu4Q"
+      },
+      {
+        id: "parks-and-rec",
+        title: "Parks and Rec",
+        artist: "Simen Sez",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2023,
+        date: "2023-06-13",
+        art: "album art/Parks and Rec cover Art.png",
+        link: "https://open.spotify.com/track/5lU5Wa8BUCVSEITPSURVya"
+      },
+      {
+        id: "famous-remix",
+        title: "Famous (Simen Sez Remix)",
+        artist: "Korin & Simen Sez",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2023,
+        date: "2023-05-03",
+        art: "album art/Famous Remix Cover V2.JPEG",
+        link: "https://open.spotify.com/track/00z2TUYaZCGfKBbusoKnLN"
+      },
+      // 2022
+      {
+        id: "special-edition",
+        title: "Special Edition",
+        artist: "Simen Sez",
+        featuring: "Alfred Nomad & Anaïs Cardot",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2022,
+        date: "2022-09-16",
+        art: "album art/Special Edition Cover v13 copy.png",
+        link: "https://open.spotify.com/track/5pQ5b9AZKpvetNzX1Ha7UP"
+      },
+      {
+        id: "chill",
+        title: "Chill",
+        artist: "Simen Sez & NanaBcool",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2022,
+        date: "2022-05-12",
+        art: "album art/Chill Cover 1.1 1080.png",
+        link: "https://open.spotify.com/track/2bhwrN8rXqAPGdG7j94hl3"
+      },
+      {
+        id: "all-i-want-is-funk",
+        title: "All I Want Is Funk",
+        artist: "Simen Sez",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2022,
+        date: "2022-01-10",
+        art: "album art/All I Want is Funk cover art.png",
+        link: "https://open.spotify.com/track/15mmHuik3Xdf8G3Y83wZIa"
+      },
+      // 2021
+      {
+        id: "cwis-remix",
+        title: "Catch What I'm Saying (Remix)",
+        artist: "Simen Sez & Julian Roy",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2021,
+        date: "2021-10-13",
+        art: "album art/CWIS Cover 7.1.png",
+        link: "https://open.spotify.com/track/60lo3dEKrvNqe5INUBZX8q"
+      },
+      {
+        id: "finneas",
+        title: "Finneas",
+        artist: "Simen Sez",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2021,
+        date: "2021-02-28",
+        art: "album art/http---gather.fandalism.com-651628--AC03B827-2A4D-460E-90F815ECE284DCEA--1613074532366--FinneasV8.1.png.jpeg",
+        link: "https://open.spotify.com/track/0dfxr6tyjBxkZC9K4Oq6kD"
+      },
+      {
+        id: "tokyo-dance",
+        title: "Tokyo Dance",
+        artist: "Simen Sez",
+        type: "Depalma House Records",
+        display: "art",
+        year: 2021,
+        date: "2021-01-06",
+        art: "album art/B6E3A0AE-.jpg",
+        link: "https://open.spotify.com/track/1fB3vTHMwauvUUIqfFU7q9"
+      }
+    ];
+
+    // Sort by date descending
+    catalog.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // Group by year
+    function groupByYear(items) {
+      const groups = {};
+      items.forEach(item => {
+        if (!groups[item.year]) groups[item.year] = [];
+        groups[item.year].push(item);
+      });
+      return groups;
+    }
+
+    function render() {
+      const container = document.getElementById('catalog');
+      const byYear = groupByYear(catalog);
+      const years = Object.keys(byYear).sort((a, b) => b - a);
+
+      let html = '';
+
+      years.forEach(year => {
+        html += `<section class="year-section"><div class="year-label">${year}</div>`;
+
+        byYear[year].forEach(item => {
+          if (item.display === 'video') {
+            // YouTube thumbnail - full width
+            const thumb = `https://img.youtube.com/vi/${item.youtube}/maxresdefault.jpg`;
+            html += `
+              <article class="entry" id="${item.id}">
+                <a class="entry-artwork video-thumb" href="${item.link}" target="_blank" rel="noopener">
+                  <img src="${thumb}" alt="${item.title}" loading="lazy">
+                </a>
+                <div class="entry-info">
+                  <div class="entry-primary">
+                    <div class="entry-title"><a href="${item.link}" target="_blank">${item.title}</a></div>
+                    <div class="entry-artist">${item.artist}</div>
+                  </div>
+                  <div class="entry-secondary">
+                    <div class="entry-type">${item.type}</div>
+                  </div>
+                </div>
+              </article>
+            `;
+          } else if (item.display === 'instagram') {
+            // Instagram thumbnail with play button
+            html += `
+              <article class="entry" id="${item.id}">
+                <a class="entry-artwork ig-thumb${item.cropped ? ' cropped' : ''}" href="${item.link}" target="_blank" rel="noopener">
+                  <img src="${item.art}" alt="${item.title || 'Instagram Reel'}" loading="lazy">
+                </a>
+                <div class="entry-info">
+                  <div class="entry-primary">
+                    <div class="entry-title"><a href="${item.link}" target="_blank">${item.title || 'Reel'}</a></div>
+                    <div class="entry-artist">${item.artist || ''}</div>
+                  </div>
+                  <div class="entry-secondary">
+                    <div class="entry-type">${item.type || ''}</div>
+                  </div>
+                </div>
+              </article>
+            `;
+          } else if (item.display === 'art' && item.art) {
+            // Full width art
+            const artistLine = item.artist + (item.featuring ? ' feat. ' + item.featuring : '');
+
+            let meta = [];
+            if (item.producer) meta.push(`prod. ${item.producer}`);
+            const metaLine = meta.join(' · ');
+
+            let tracklistHTML = '';
+            if (item.tracks && item.tracks.length > 0) {
+              tracklistHTML = `<div class="tracklist">${item.tracks.map(t =>
+                `<div class="track"><span class="track-num">${t.num}.</span><span class="track-title">${t.title}</span><span class="track-duration">${t.duration}</span></div>`
+              ).join('')}</div>`;
+            }
+
+            html += `
+              <article class="entry" id="${item.id}">
+                <a class="entry-artwork${item.cropped ? ' cropped' : ''}" href="${item.link || '#'}" target="_blank" rel="noopener" ${!item.link ? 'style="pointer-events:none"' : ''}>
+                  <img src="${item.art}" alt="${item.title}" loading="lazy">
+                </a>
+                <div class="entry-info">
+                  <div class="entry-primary">
+                    <div class="entry-title">${item.link ? `<a href="${item.link}" target="_blank">${item.title}</a>` : item.title}</div>
+                    <div class="entry-artist">${artistLine}</div>
+                    ${metaLine ? `<div class="entry-meta">${metaLine}</div>` : ''}
+                    ${tracklistHTML}
+                  </div>
+                  <div class="entry-secondary">
+                    <div class="entry-type">${item.type}</div>
+                  </div>
+                </div>
+              </article>
+            `;
+          } else {
+            // Text only (no art)
+            html += `
+              <article class="entry" id="${item.id}">
+                <div class="entry-info">
+                  <div class="entry-primary">
+                    <div class="entry-title">${item.link ? `<a href="${item.link}" target="_blank">${item.title}</a>` : item.title}</div>
+                    <div class="entry-artist">${item.artist}</div>
+                  </div>
+                  <div class="entry-secondary">
+                    <div class="entry-type">${item.type}</div>
+                  </div>
+                </div>
+              </article>
+            `;
+          }
+        });
+
+        html += '</section>';
+      });
+
+      container.innerHTML = html;
+    }
+
+    render();
+  </script>
+</body>
+</html>
