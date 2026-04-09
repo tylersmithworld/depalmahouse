@@ -1,21 +1,23 @@
 # Outreacher
 
 ## What this is
-`index.html` is a flat-by-instrument IG outreach list for Simen (Creative Director, Depalma House). Started with 329 entries; verified and pruned to 319.
+`index.html` is a flat-by-instrument IG outreach list for Simen (Creative Director, Depalma House). Started with 329 entries; verified/pruned to 319; expanded to 347.
 
 URL (live): https://depalma.house/s/outreacher/ — private, noindex, DM-only link.
 
-## Status: VERIFICATION COMPLETE ✓
-All 319 entries verified. 10 removed (no IG or wrong section). Counter updated.
+## Status: EXPANSION COMPLETE ✓
+- Phase 1: Verified 319 entries (removed 10 bad handles)
+- Phase 2: Added 28 new IG content creators (319 → 347)
 
-## Next phase: EXPANSION
-Search external sources (not Instagram directly) for new artists to add. Query patterns:
-- "instagram guitarist jazz"
-- "instagram bassist soul R&B"
-- "instagram drummer session musician LA"
-- etc.
-
-Look for listicles, articles, "musicians to follow" posts that mention IG handles. Add new entries to appropriate sections, verify handle, add ✓.
+## Expansion log (319 → 347)
+Added Instagram content creators (bedroom musicians, viral players, educators):
+- **Bass +4**: charles_berthoud, davie504, leylasmusic, its_adamneely
+- **Guitar +9**: pauldavidsguitar, grace__bowers, marcin.music, myhre.nicklas, tianaohara, beaudiakowicz, eric_assarsson, fayewebster, sierraelizabethferrell
+- **Drums +5**: thepocketqueen, zackgrooves, anika.nilles, elestepariosiberiano, rajameissner
+- **Horns +4**: karsten.belt, augie_bello, bettersax, thattrumpetchic
+- **Keys +3**: jacobcollier, robertglasper, nickmira_
+- **Strings +1**: tinaguo
+- **Vocalists +2**: 4batz, leonthomas
 
 ## Verification log (329 → 319)
 - [x] **Bass** — done. 32 → 28. All ✓. (Removed: henrywas__, sebsteinberg, shamarallen, danhorne. Many wrong handles corrected.)
