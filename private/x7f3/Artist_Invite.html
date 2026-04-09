@@ -195,6 +195,43 @@
     }
     .or-line a:hover { border-color: #8b7355; }
 
+    .gear-wrap {
+      margin-top: 1.8em;
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .back-link {
+      display: inline-block;
+      font-size: 13px;
+      color: #3d3632;
+      text-decoration: none;
+      border-bottom: 1px solid #c4b8a8;
+      margin-bottom: 1.2em;
+    }
+    .back-link:hover { border-color: #8b7355; }
+    .gear-h {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #8a7d72;
+      font-weight: 500;
+      margin-top: 1.2em;
+      margin-bottom: 0.5em;
+    }
+    .gear-list {
+      list-style: none;
+      font-size: 14px;
+      color: #3d3632;
+      line-height: 1.6;
+    }
+    .gear-list li { padding: 2px 0; }
+    .gear-intro {
+      font-size: 13px;
+      color: #6b5f56;
+      font-style: italic;
+      margin-bottom: 0.4em;
+    }
+
     .terms {
       margin-top: 2.4em;
       padding-top: 1.6em;
@@ -209,7 +246,16 @@
     .terms p + p { margin-top: 0.8em; }
 
     @media (max-width: 600px) {
-      .panel { padding: 40px 22px 26px; }
+      .panel {
+        padding: 32px 18px 20px;
+        width: calc(100% - 40px);
+        max-height: calc(100vh - 80px);
+        font-size: 14px;
+      }
+      .brand { margin-bottom: 1.2em; font-size: 10px; }
+      .typewriter-line { font-size: 13px; }
+      .cal-wrap iframe { height: 380px !important; }
+      .terms { margin-top: 1.6em; padding-top: 1.2em; font-size: 10px; }
     }
   </style>
 </head>
@@ -221,7 +267,7 @@
   <div class="panel" id="panel" role="dialog" aria-label="Sessions invitation">
     <button class="close" id="closeBtn" aria-label="Close">✕</button>
 
-    <div class="brand">Depalma House — Sessions</div>
+    <div class="brand" id="brand">Depalma House — Sessions</div>
 
     <p class="typewriter-line" id="line1"></p>
     <p class="typewriter-line" id="line2"></p>
@@ -234,7 +280,86 @@
       </iframe>
     </div>
 
-    <p class="or-line" id="orLine">or <a href="mailto:depalmabyaec@gmail.com">email simen</a></p>
+    <p class="or-line" id="orLine">or <a href="mailto:depalmabyaec@gmail.com">email simen</a> · <a href="#" id="gearLink">gear list</a></p>
+
+    <div class="gear-wrap" id="gearWrap" hidden>
+      <a href="#" id="backLink" class="back-link">← back to calendar</a>
+      <p class="gear-intro">Hand-soldered Grimm cabling throughout. AES67 networked across three rooms.</p>
+
+      <h3 class="gear-h">Keys</h3>
+      <ul class="gear-list">
+        <li>Andreas Christensen baby grand — 1960s Danish, stainless Tulex, Renner action</li>
+        <li>Fender Rhodes Mark I/II Suitcase</li>
+        <li>Moog Matriarch</li>
+        <li>Roland Juno-106S — fully refurbished, Gravitational Slingshot voice chips</li>
+      </ul>
+
+      <h3 class="gear-h">Guitars &amp; Basses</h3>
+      <ul class="gear-list">
+        <li>Epiphone Casino — modified, Fralin hum-free P90s, vintage nickel hardware</li>
+        <li>'51 P Bass — custom by Cucci, Fralin pickup</li>
+        <li>Fender Stratocaster — partscaster, Fralin '59 Woodstocks, Warmoth neck, Olympic White</li>
+      </ul>
+
+      <h3 class="gear-h">Amps &amp; Cabinets</h3>
+      <ul class="gear-list">
+        <li>Fender Princeton Reverb — fully rebuilt (Mojotone, Mercury Magnetics, Jupiter speaker)</li>
+        <li>Raymer boutique tube amp</li>
+        <li>Cordovox Leslie cabinet</li>
+      </ul>
+
+      <h3 class="gear-h">Microphones</h3>
+      <ul class="gear-list">
+        <li>Brauner VMX — cardioid tube</li>
+        <li>Coles 4038 (pair) — ribbons</li>
+        <li>Beyerdynamic M-160 (pair) — double ribbons</li>
+        <li>Shure SM7B (pair)</li>
+        <li>Shure SM58 Crimson Blue</li>
+        <li>Electro-Voice pair</li>
+      </ul>
+
+      <h3 class="gear-h">Interface &amp; Outboard</h3>
+      <ul class="gear-list">
+        <li>Merging HAPI MKIII — w/ preamps, AD/DA</li>
+        <li>Merging Anubis</li>
+        <li>Merging MT48</li>
+        <li>BAE 1066 — Neve-style preamp/EQ</li>
+        <li>SSL G Bus Compressor</li>
+        <li>Dolby A vocal effect</li>
+        <li>Yamaha tape machine</li>
+      </ul>
+
+      <h3 class="gear-h">Drums &amp; Percussion</h3>
+      <ul class="gear-list">
+        <li>Two full kits — Istanbul Agop cymbals</li>
+        <li>ETS drums</li>
+        <li>Balinese angklung (Key of C)</li>
+        <li>Agogo bells, shakers, tambourine, assorted hand percussion</li>
+      </ul>
+
+      <h3 class="gear-h">DJ / Beat Making</h3>
+      <ul class="gear-list">
+        <li>Technics SL-1200 (pair)</li>
+        <li>Pioneer DJM-S9</li>
+        <li>Akai MPC 3000</li>
+        <li>Vinyl collection</li>
+      </ul>
+
+      <h3 class="gear-h">Pedals</h3>
+      <ul class="gear-list">
+        <li>Chase Bliss Warped Vinyl &amp; MINT</li>
+        <li>Eventide Harmonizer</li>
+        <li>Boss DD-500, GE-7, GEB-7</li>
+        <li>Fulltone Wah &amp; Tremolo</li>
+        <li>Safari Pedals, Supa Funk, and more</li>
+      </ul>
+
+      <h3 class="gear-h">Monitoring</h3>
+      <ul class="gear-list">
+        <li>Legacy Signature SE — 5-way, dual ribbon tweeter</li>
+        <li>Yamaha nearfields</li>
+      </ul>
+    </div>
 
     <div class="terms" id="terms">
       <p>Contributors will receive publishing splits on any and all releases. Sample packs made from recordings are split evenly between Depalma and the players.</p>
@@ -335,6 +460,36 @@
     });
     renderCal();
     */
+
+    const gearLink = document.getElementById('gearLink');
+    const backLink = document.getElementById('backLink');
+    const gearWrap = document.getElementById('gearWrap');
+    const brand = document.getElementById('brand');
+    const line1 = document.getElementById('line1');
+    const line2 = document.getElementById('line2');
+    const termsEl = document.getElementById('terms');
+    gearLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      calWrap.hidden = true;
+      orLine.hidden = true;
+      line1.hidden = true;
+      line2.hidden = true;
+      termsEl.hidden = true;
+      brand.textContent = 'Depalma House — Gear List';
+      gearWrap.hidden = false;
+      panel.scrollTop = 0;
+    });
+    backLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      gearWrap.hidden = true;
+      line1.hidden = false;
+      line2.hidden = false;
+      termsEl.hidden = false;
+      brand.textContent = 'Depalma House — Sessions';
+      calWrap.hidden = false;
+      orLine.hidden = false;
+      panel.scrollTop = 0;
+    });
 
     function closeOverlay() {
       panel.classList.add('hidden');
