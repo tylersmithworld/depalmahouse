@@ -220,11 +220,17 @@
     }
     .gear-list {
       list-style: none;
-      font-size: 14px;
+      font-size: 12px;
       color: #3d3632;
-      line-height: 1.6;
+      line-height: 1.55;
     }
-    .gear-list li { padding: 2px 0; }
+    .gear-list li { padding: 3px 0; }
+    .gear-list strong { font-weight: 600; color: #3d3632; }
+    .gear-list .note { color: #8a7d72; font-weight: 400; font-size: 11px; }
+    @media (max-width: 600px) {
+      .gear-list { font-size: 11px; }
+      .gear-list .note { font-size: 10px; }
+    }
     .gear-intro {
       font-size: 13px;
       color: #6b5f56;
@@ -247,10 +253,10 @@
 
     @media (max-width: 600px) {
       .panel {
-        padding: 24px 14px 16px;
-        width: 75%;
-        max-width: 340px;
-        max-height: 75vh;
+        padding: 26px 15px 18px;
+        width: 80%;
+        max-width: 360px;
+        max-height: 80vh;
         font-size: 12px;
       }
       .brand { margin-bottom: 0.9em; font-size: 9px; }
@@ -292,76 +298,76 @@
 
       <h3 class="gear-h">Keys</h3>
       <ul class="gear-list">
-        <li>Andreas Christensen baby grand — 1960s Danish, stainless Tulex, Renner action</li>
-        <li>Fender Rhodes Mark I/II Suitcase</li>
-        <li>Moog Matriarch</li>
-        <li>Roland Juno-106S — fully refurbished, Gravitational Slingshot voice chips</li>
+        <li><strong>Andreas Christensen baby grand</strong> <span class="note">— 1960s Danish, stainless Tulex, Renner action</span></li>
+        <li><strong>Fender Rhodes Mark I/II Suitcase</strong></li>
+        <li><strong>Moog Matriarch</strong></li>
+        <li><strong>Roland Juno-106S</strong> <span class="note">— fully refurbished, Gravitational Slingshot voice chips</span></li>
       </ul>
 
       <h3 class="gear-h">Guitars &amp; Basses</h3>
       <ul class="gear-list">
-        <li>Epiphone Casino — modified, Fralin hum-free P90s, vintage nickel hardware</li>
-        <li>'51 P Bass — custom by Cucci, Fralin pickup</li>
-        <li>Fender Stratocaster — partscaster, Fralin '59 Woodstocks, Warmoth neck, Olympic White</li>
+        <li><strong>Epiphone Casino</strong> <span class="note">— modified, Fralin hum-free P90s, vintage nickel hardware</span></li>
+        <li><strong>'51 P Bass</strong> <span class="note">— custom by Cucci, Fralin pickup</span></li>
+        <li><strong>Fender Stratocaster</strong> <span class="note">— partscaster, Fralin '59 Woodstocks, Warmoth neck, Olympic White</span></li>
       </ul>
 
       <h3 class="gear-h">Amps &amp; Cabinets</h3>
       <ul class="gear-list">
-        <li>Fender Princeton Reverb — fully rebuilt (Mojotone, Mercury Magnetics, Jupiter speaker)</li>
-        <li>Raymer boutique tube amp</li>
-        <li>Cordovox Leslie cabinet</li>
+        <li><strong>Fender Princeton Reverb</strong> <span class="note">— fully rebuilt (Mojotone, Mercury Magnetics, Jupiter speaker)</span></li>
+        <li><strong>Raymer boutique tube amp</strong></li>
+        <li><strong>Cordovox Leslie cabinet</strong></li>
       </ul>
 
       <h3 class="gear-h">Microphones</h3>
       <ul class="gear-list">
-        <li>Brauner VMX — cardioid tube</li>
-        <li>Coles 4038 (pair) — ribbons</li>
-        <li>Beyerdynamic M-160 (pair) — double ribbons</li>
-        <li>Shure SM7B (pair)</li>
-        <li>Shure SM58 Crimson Blue</li>
-        <li>Electro-Voice pair</li>
+        <li><strong>Brauner VMX</strong> <span class="note">— cardioid tube</span></li>
+        <li><strong>Coles 4038 (pair)</strong> <span class="note">— ribbons</span></li>
+        <li><strong>Beyerdynamic M-160 (pair)</strong> <span class="note">— double ribbons</span></li>
+        <li><strong>Shure SM7B (pair)</strong></li>
+        <li><strong>Shure SM58 Crimson Blue</strong></li>
+        <li><strong>Electro-Voice pair</strong></li>
       </ul>
 
       <h3 class="gear-h">Interface &amp; Outboard</h3>
       <ul class="gear-list">
-        <li>Merging HAPI MKIII — w/ preamps, AD/DA</li>
-        <li>Merging Anubis</li>
-        <li>Merging MT48</li>
-        <li>BAE 1066 — Neve-style preamp/EQ</li>
-        <li>SSL G Bus Compressor</li>
-        <li>Dolby A vocal effect</li>
-        <li>Yamaha tape machine</li>
+        <li><strong>Merging HAPI MKIII</strong> <span class="note">— w/ preamps, AD/DA</span></li>
+        <li><strong>Merging Anubis</strong></li>
+        <li><strong>Merging MT48</strong></li>
+        <li><strong>BAE 1066</strong> <span class="note">— Neve-style preamp/EQ</span></li>
+        <li><strong>SSL G Bus Compressor</strong></li>
+        <li><strong>Dolby A vocal effect</strong></li>
+        <li><strong>Yamaha tape machine</strong></li>
       </ul>
 
       <h3 class="gear-h">Drums &amp; Percussion</h3>
       <ul class="gear-list">
-        <li>Two full kits — Istanbul Agop cymbals</li>
-        <li>ETS drums</li>
-        <li>Balinese angklung (Key of C)</li>
-        <li>Agogo bells, shakers, tambourine, assorted hand percussion</li>
+        <li><strong>Two full kits</strong> <span class="note">— Istanbul Agop cymbals</span></li>
+        <li><strong>ETS drums</strong></li>
+        <li><strong>Balinese angklung</strong> <span class="note">— Key of C</span></li>
+        <li><strong>Hand percussion</strong> <span class="note">— agogo bells, shakers, tambourine, assorted</span></li>
       </ul>
 
       <h3 class="gear-h">DJ / Beat Making</h3>
       <ul class="gear-list">
-        <li>Technics SL-1200 (pair)</li>
-        <li>Pioneer DJM-S9</li>
-        <li>Akai MPC 3000</li>
-        <li>Vinyl collection</li>
+        <li><strong>Technics SL-1200 (pair)</strong></li>
+        <li><strong>Pioneer DJM-S9</strong></li>
+        <li><strong>Akai MPC 3000</strong></li>
+        <li><strong>Vinyl collection</strong></li>
       </ul>
 
       <h3 class="gear-h">Pedals</h3>
       <ul class="gear-list">
-        <li>Chase Bliss Warped Vinyl &amp; MINT</li>
-        <li>Eventide Harmonizer</li>
-        <li>Boss DD-500, GE-7, GEB-7</li>
-        <li>Fulltone Wah &amp; Tremolo</li>
-        <li>Safari Pedals, Supa Funk, and more</li>
+        <li><strong>Chase Bliss</strong> <span class="note">— Warped Vinyl, MINT</span></li>
+        <li><strong>Eventide Harmonizer</strong></li>
+        <li><strong>Boss</strong> <span class="note">— DD-500, GE-7, GEB-7</span></li>
+        <li><strong>Fulltone</strong> <span class="note">— Wah, Tremolo</span></li>
+        <li><strong>Safari Pedals, Supa Funk, and more</strong></li>
       </ul>
 
       <h3 class="gear-h">Monitoring</h3>
       <ul class="gear-list">
-        <li>Legacy Signature SE — 5-way, dual ribbon tweeter</li>
-        <li>Yamaha nearfields</li>
+        <li><strong>Legacy Signature SE</strong> <span class="note">— 5-way, dual ribbon tweeter</span></li>
+        <li><strong>Yamaha nearfields</strong></li>
       </ul>
     </div>
 
