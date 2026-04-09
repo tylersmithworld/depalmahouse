@@ -18,7 +18,7 @@ After each section, update the counter at the bottom (`<span id="cnt">0</span> /
 
 ## Progress
 - [x] **Bass** — done. 32 → 28. All ✓. (Removed: henrywas__, sebsteinberg, shamarallen, danhorne. Many wrong handles corrected.)
-- [ ] Guitar (51 entries)
+- [x] **Guitar** — done. 51 → 49. All ✓. (Removed: gregleisz, smokeyhormel. Major handle corrections: adambrisbin→young_gumby, buck_meek→buckmeek, corywong→coryjwong, giladhekselman→ghex, harrisonwhitford→scarrisonwhitford, ichika_nito→ichika_mo, indigodesouza→indigofaraway, isaiahsharkey→sharkey335, jairusmozee→jmothegreat, jonathanwilsonmusic→nongmopaleovapedaddy420, julianlageguitar→jlage, madeline_kenney→mkenneymusic, mayadelilah→mayadelilahh, megbaird→meglingbaird, morganburrs→steelstring_player, nickhakim→en_hakim, niluferyanya→niluferyanyaaaaaa, pedromartinsmusic→pedromartins93, porridgeradio→danamargolin, samevian→sam.evian, scotte_lepage→scottielepage, thiagonassif→thiagonassifs, timhenson→thew6rst, yvettecy→yvetteyoung.)
 - [ ] Keys (48)
 - [ ] Drums (42)
 - [ ] Horns (25)
