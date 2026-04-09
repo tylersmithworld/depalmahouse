@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Depalma House — Sessions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #e8e0d5;
+      color: #3d3632;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow: hidden;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      z-index: 0;
+    }
+
+    .scrim {
+      position: fixed;
+      inset: 0;
+      background: rgba(232, 224, 213, 0.35);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      z-index: 1;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .scrim.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .panel {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(460px, calc(100% - 32px));
+      max-height: calc(100vh - 40px);
+      background: #f3ece0;
+      border: 1px solid #d4c9ba;
+      border-radius: 6px;
+      box-shadow: 0 30px 80px rgba(60, 45, 30, 0.18);
+      padding: 32px 32px 24px;
+      z-index: 2;
+      overflow-y: auto;
+      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+    }
+    .panel.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(-50%, -46%);
+      pointer-events: none;
+    }
+
+    .close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #a89a8c;
+      font-size: 18px;
+      line-height: 1;
+      border-radius: 4px;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    .close:hover { color: #3d3632; background: rgba(139,115,85,0.1); }
+
+    .brand {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8a7d72;
+      margin-bottom: 1.8em;
+    }
+
+    .typewriter-line {
+      font-size: 15px;
+      color: #6b5f56;
+      margin-bottom: 0.3em;
+      min-height: 1.7em;
+    }
+    .typewriter-line .cursor {
+      display: inline-block;
+      width: 1px;
+      height: 1em;
+      background: #6b5f56;
+      margin-left: 2px;
+      animation: blink 1s step-end infinite;
+      vertical-align: text-bottom;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Calendar */
+    .cal-wrap {
+      margin-top: 1.8em;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .cal-wrap.visible { opacity: 1; }
+
+    .cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.9em;
+    }
+    .cal-title {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #3d3632;
+    }
+    .cal-nav {
+      display: flex;
+      gap: 4px;
+    }
+    .cal-nav button {
+      width: 26px;
+      height: 26px;
+      border: 1px solid #d4c9ba;
+      background: transparent;
+      color: #6b5f56;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1;
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    }
+    .cal-nav button:hover { border-color: #8b7355; color: #3d3632; background: rgba(139,115,85,0.08); }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+    .cal-dow {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #a89a8c;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 6px 0;
+    }
+    .cal-day {
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #c4b8a8;
+      border: 1px solid transparent;
+      border-radius: 3px;
+    }
+    .cal-day.available {
+      color: #3d3632;
+      border-color: #d4c9ba;
+      cursor: pointer;
+      background: #faf5ec;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .cal-day.available:hover {
+      background: #8b7355;
+      color: #f3ece0;
+      border-color: #8b7355;
+    }
+    .cal-day.past { color: #d4c9ba; }
+
+    .or-line {
+      margin-top: 1.6em;
+      font-size: 13px;
+      color: #6b5f56;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .or-line.visible { opacity: 1; }
+    .or-line a {
+      color: #3d3632;
+      text-decoration: none;
+      border-bottom: 1px solid #c4b8a8;
+    }
+    .or-line a:hover { border-color: #8b7355; }
+
+    .terms {
+      margin-top: 2.4em;
+      padding-top: 1.6em;
+      border-top: 1px solid #d4c9ba;
+      font-size: 11px;
+      line-height: 1.7;
+      color: #8a7d72;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .terms.visible { opacity: 1; }
+    .terms p + p { margin-top: 0.8em; }
+
+    @media (max-width: 600px) {
+      .panel { padding: 40px 22px 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <iframe class="backdrop" src="https://depalma.house" title="Depalma House"></iframe>
+  <div class="scrim" id="scrim"></div>
+
+  <div class="panel" id="panel" role="dialog" aria-label="Sessions invitation">
+    <button class="close" id="closeBtn" aria-label="Close">✕</button>
+
+    <div class="brand">Depalma House — Sessions</div>
+
+    <p class="typewriter-line" id="line1"></p>
+    <p class="typewriter-line" id="line2"></p>
+
+    <div class="cal-wrap" id="calWrap">
+      <iframe
+        src="https://cal.com/depalma-house-kjlq7t/artist-invite?embed=true&theme=light"
+        style="width:100%; height:460px; border:1px solid #d4c9ba; border-radius:4px; background:#faf5ec;"
+        title="Book a session">
+      </iframe>
+    </div>
+
+    <p class="or-line" id="orLine">or <a href="mailto:depalmabyaec@gmail.com">email simen</a></p>
+
+    <div class="terms" id="terms">
+      <p>Contributors will receive publishing splits on any and all releases. Sample packs made from recordings are split evenly between Depalma and the players.</p>
+      <p>Releases under Depalma House Records will include publishing and master recording splits for contributing musicians.</p>
+    </div>
+  </div>
+
+  <script>
+    const lines = [
+      { el: document.getElementById('line1'), text: "This page isn't public." },
+      { el: document.getElementById('line2'), text: "You were invited." }
+    ];
+    const calWrap = document.getElementById('calWrap');
+    const orLine = document.getElementById('orLine');
+    const terms = document.getElementById('terms');
+    const panel = document.getElementById('panel');
+    const scrim = document.getElementById('scrim');
+    const closeBtn = document.getElementById('closeBtn');
+
+    let lineIndex = 0, charIndex = 0;
+    function typeWriter() {
+      if (lineIndex >= lines.length) {
+        setTimeout(() => {
+          calWrap.classList.add('visible');
+          setTimeout(() => orLine.classList.add('visible'), 350);
+          setTimeout(() => terms.classList.add('visible'), 650);
+        }, 250);
+        return;
+      }
+      const current = lines[lineIndex];
+      if (charIndex < current.text.length) {
+        current.el.innerHTML = current.text.substring(0, charIndex + 1) + '<span class="cursor"></span>';
+        charIndex++;
+        setTimeout(typeWriter, 45);
+      } else {
+        current.el.innerHTML = current.text;
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeWriter, 400);
+      }
+    }
+    setTimeout(typeWriter, 500);
+
+    /* Calendar rendering disabled — using cal.com embed instead
+    // Calendar — Mon (1) and Thu (4) selectable
+    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const DOW = ['S','M','T','W','T','F','S'];
+    const today = new Date(); today.setHours(0,0,0,0);
+    let viewYear = today.getFullYear();
+    let viewMonth = today.getMonth();
+
+    function renderCal() {
+      const title = document.getElementById('calTitle');
+      const grid = document.getElementById('calGrid');
+      title.textContent = MONTHS[viewMonth] + ' ' + viewYear;
+      grid.innerHTML = '';
+      DOW.forEach(d => {
+        const el = document.createElement('div');
+        el.className = 'cal-dow';
+        el.textContent = d;
+        grid.appendChild(el);
+      });
+      const first = new Date(viewYear, viewMonth, 1);
+      const startDow = first.getDay();
+      const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+      for (let i = 0; i < startDow; i++) {
+        const el = document.createElement('div');
+        el.className = 'cal-day';
+        grid.appendChild(el);
+      }
+      for (let d = 1; d <= daysInMonth; d++) {
+        const date = new Date(viewYear, viewMonth, d);
+        const dow = date.getDay();
+        const el = document.createElement('div');
+        el.className = 'cal-day';
+        el.textContent = d;
+        if (date < today) {
+          el.classList.add('past');
+        } else if (dow === 1 || dow === 4) {
+          el.classList.add('available');
+          el.addEventListener('click', () => {
+            const iso = date.toISOString().slice(0,10);
+            const subject = encodeURIComponent('Session request — ' + MONTHS[viewMonth] + ' ' + d);
+            const body = encodeURIComponent("Hey Simen,\n\nI'd like to come through on " + MONTHS[viewMonth] + ' ' + d + ". Here's what I'm thinking:\n\n");
+            window.location.href = 'mailto:depalmabyaec@gmail.com?subject=' + subject + '&body=' + body;
+          });
+        }
+        grid.appendChild(el);
+      }
+    }
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      viewMonth--; if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+      renderCal();
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      viewMonth++; if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+      renderCal();
+    });
+    renderCal();
+    */
+
+    function closeOverlay() {
+      panel.classList.add('hidden');
+      scrim.classList.add('hidden');
+    }
+    closeBtn.addEventListener('click', closeOverlay);
+    scrim.addEventListener('click', closeOverlay);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.classList.contains('hidden')) closeOverlay();
+    });
+  </script>
+</body>
+</html>
