@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Fox Den — Series Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --paper:#fbf7f0; --ink:#201b15; --soft:#6b6357; --rule:#e2dacb;
+    --accent:#9a5b2f; --olive:#645b3e; --dark:#15120e; --cream:#f4ecdc;
+    --pad:clamp(22px,6vw,40px);
+  }
+  body{background:#e7e0d2;font-family:"Hanken Grotesk",system-ui,sans-serif;color:var(--ink);
+    -webkit-font-smoothing:antialiased;line-height:1.55;}
+  .deck{max-width:760px;margin:0 auto;background:var(--paper);box-shadow:0 30px 90px -40px rgba(0,0,0,.55);}
+
+  /* every image / video flows edge-to-edge, flush into the next */
+  .full{display:block;width:100%;height:auto;}
+  video.full{background:#000;}
+
+  .kicker{font-family:"Hanken Grotesk";font-weight:600;font-size:.66rem;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--accent);}
+
+  /* ---- COVER: all photo, title overlaid ---- */
+  .cover{position:relative;}
+  .cover>img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:center 48%;}
+  .cover .scrim{position:absolute;inset:0;background:
+    linear-gradient(180deg,rgba(8,6,4,.30) 0%,rgba(8,6,4,0) 26%,rgba(8,6,4,.10) 55%,rgba(8,6,4,.86) 100%);}
+  .cover .cap{position:absolute;left:0;right:0;bottom:0;padding:0 var(--pad) clamp(16px,3.5vw,30px);}
+  .cover .k{color:#e7d7b8;font-weight:600;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;}
+  .cover h1{font-family:"Fraunces",serif;font-weight:600;color:#fff;
+    font-size:clamp(2.2rem,8.4vw,3.7rem);line-height:.92;letter-spacing:-.02em;margin:8px 0 0;
+    text-shadow:0 2px 30px rgba(0,0,0,.45);}
+  .cover h1 .wt{font-style:italic;font-weight:400;font-size:.2em;color:#e7d7b8;letter-spacing:0;
+    vertical-align:super;margin-left:.5em;white-space:nowrap;text-shadow:none;}
+  .cover .sub{margin-top:12px;color:#f0e7d6;font-size:clamp(.98rem,2.7vw,1.12rem);font-weight:500;}
+
+  /* ---- TEXT (reading) blocks — tight ---- */
+  .statement{background:var(--olive);color:var(--cream);padding:clamp(30px,7vw,52px) var(--pad);}
+  .statement .kicker{color:#e2c99d;}
+  .statement p{font-family:"Fraunces",serif;font-weight:400;font-size:clamp(1.35rem,4.3vw,1.9rem);
+    line-height:1.32;letter-spacing:-.005em;max-width:32ch;margin-top:18px;}
+  .statement em{font-style:italic;color:#fff;}
+
+  .read{padding:clamp(28px,6vw,48px) var(--pad);}
+  .read .kicker{margin-bottom:18px;}
+  .read h3{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(1.15rem,3.6vw,1.5rem);
+    line-height:1.15;margin-bottom:10px;}
+  .read p{font-size:clamp(1rem,2.6vw,1.06rem);color:#3a342c;max-width:60ch;}
+  .read p+p{margin-top:10px;}
+  .read .grp+.grp{margin-top:clamp(22px,4vw,32px);}
+  .guests h3{margin-bottom:6px;}
+  .gnames{display:grid;grid-template-columns:1fr 1fr;column-gap:24px;}
+  .gnames span{font-family:"Fraunces",serif;font-size:clamp(1.02rem,3vw,1.18rem);line-height:1.2;
+    padding:11px 2px;border-top:1px solid var(--rule);color:var(--ink);}
+  @media (min-width:520px){.gnames{grid-template-columns:1fr 1fr 1fr;}}
+
+  /* ---- PREVIEW: inline, fills width, no heading / no black band ---- */
+  .pv{position:relative;width:100%;overflow:hidden;line-height:0;}
+  .pv iframe{display:block;width:100%;height:606px;border:0;background:var(--dark);}
+  @media (min-width:760px){
+    .pv{height:1118px;}
+    .pv iframe{width:412px;height:606px;transform:scale(1.845);transform-origin:top left;}
+  }
+  .cap-note{padding:9px var(--pad) 0;font-size:.72rem;letter-spacing:.08em;color:var(--soft);line-height:1.4;}
+
+  /* ---- PARTNERS ---- */
+  .partners{padding:clamp(28px,6vw,48px) var(--pad) clamp(34px,7vw,54px);}
+  .partners .kicker{margin-bottom:16px;}
+  .roster .r{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+    padding:13px 0;border-top:1px solid var(--rule);}
+  .roster .r:last-of-type{border-bottom:1px solid var(--rule);}
+  .roster .nm{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(1.1rem,3.4vw,1.4rem);line-height:1.1;}
+  .roster .org{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--soft);text-align:right;flex:none;}
+  .spons{margin-top:18px;color:var(--soft);font-size:.92rem;max-width:58ch;}
+
+  /* persistent sound toggle */
+  .sound{position:fixed;top:14px;right:14px;z-index:100;display:inline-flex;align-items:center;gap:7px;
+    padding:8px 13px 8px 10px;border-radius:100px;border:1px solid rgba(255,255,255,.2);
+    background:rgba(18,15,11,.5);-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);
+    color:#f4ecdc;font-family:"Hanken Grotesk",sans-serif;font-weight:600;font-size:.6rem;
+    letter-spacing:.16em;text-transform:uppercase;cursor:pointer;line-height:1;
+    box-shadow:0 8px 24px -12px rgba(0,0,0,.6);transition:background .2s,transform .2s;}
+  .sound:hover{background:rgba(18,15,11,.74);}
+  .sound:active{transform:scale(.96);}
+  .sound svg{width:15px;height:15px;display:block;flex:none;overflow:visible;}
+  .sound .wave{display:none;}
+  .sound.on .wave{display:inline;}
+  .sound .slash{display:inline;}
+  .sound.on .slash{display:none;}
+  @media (prefers-reduced-motion:reduce){.sound{transition:none;}}
+</style>
+</head>
+<body>
+<button class="sound" id="sound" type="button" aria-label="Turn trailer sound on">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" stroke="none"></path>
+    <g class="wave"><path d="M16 8.5a4.5 4.5 0 0 1 0 7"></path><path d="M18.7 6a8 8 0 0 1 0 12"></path></g>
+    <g class="slash"><line x1="3" y1="21" x2="21" y2="3" stroke="#15120e" stroke-width="4.5"></line><line x1="3" y1="21" x2="21" y2="3" stroke="currentColor" stroke-width="2"></line></g>
+  </svg>
+  <span class="lbl">Sound on</span>
+</button>
+<div class="deck">
+
+  <!-- COVER — all photo, overlaid title -->
+  <section class="cover">
+    <img src="assets/cover.jpg" alt="Elijah Fox's home studio in the Los Angeles hills">
+    <div class="scrim"></div>
+    <div class="cap">
+      <h1>The Fox Den<span class="wt">working title</span></h1>
+      <div class="sub">An Elijah Fox series pitch — Season One</div>
+    </div>
+  </section>
+
+  <!-- CONCEPT -->
+  <section class="statement">
+    <div class="kicker">The concept</div>
+    <p>An <em>instrumental performance</em> series with multi-instrumentalist Elijah Fox — filmed at his
+    home studio in the Los Angeles hills. Each episode, a guest instrumentalist sits in with Elijah and
+    his players for an <em>original, improvised jam.</em></p>
+  </section>
+
+  <!-- IMAGE RUN -->
+  <img class="full" src="assets/keys.jpg" alt="Elijah Fox at the keys" loading="lazy">
+  <img class="full" src="assets/rhythm.jpg" alt="Drums and bass" loading="lazy">
+  <img class="full" src="assets/sax.jpg" alt="Braxton Cook on saxophone" loading="lazy">
+  <video class="full" id="trailer" autoplay muted loop playsinline preload="auto" poster="assets/trailer-poster.jpg">
+    <source src="assets/trailer.mp4" type="video/mp4">
+  </video>
+
+  <!-- FORMAT -->
+  <section class="read">
+    <div class="kicker">The format</div>
+    <div class="grp">
+      <p>Elijah leads a rhythm section from the keys, and each episode features a well-known contributing
+      player. An 8–20 minute living-room jam of original music, intercut with behind-the-scenes hang
+      footage — improvised, filmed documentary-style with professional sound and multi-camera coverage.</p>
+    </div>
+  </section>
+
+  <img class="full" src="assets/band.jpg" alt="The full band mid-take" loading="lazy">
+
+  <!-- SYNOPSIS -->
+  <section class="read">
+    <div class="kicker">Why it works</div>
+    <div class="grp">
+      <p>Elijah's house in the Los Angeles hills has become a hub for high-level session musicians. His
+      performances in this live-instrumental lane have pulled views into the millions, and his posts
+      routinely cross 50–100K. Every track is original and improvised — nothing to license, no catalog
+      to clear, and each episode yields two assets: the video, and a track that ships to DSPs.</p>
+    </div>
+    <div class="grp guests">
+      <h3>Season 1 — possible guests</h3>
+      <div class="gnames">
+        <span>Yussef Dayes</span>
+        <span>Braxton Cook</span>
+        <span>José Rios</span>
+        <span>Rocco Palladino</span>
+        <span>Tom Misch</span>
+        <span>Brandee Younger</span>
+        <span>Yasmin Williams</span>
+        <span>Terrace Martin</span>
+        <span>Robert Glasper</span>
+        <span>Kamasi Washington</span>
+        <span>DOMi &amp; JD Beck</span>
+        <span>MonoNeon</span>
+        <span>Thundercat</span>
+        <span>Béla Fleck</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREVIEW — inline, fills width -->
+  <div class="pv"><iframe src="fox-den-ep3-preview.html" title="Episode preview mockup" scrolling="no" loading="lazy"></iframe></div>
+
+  <!-- PARTNERS -->
+  <img class="full" src="assets/elijah.jpg" alt="Elijah Fox" loading="lazy">
+  <section class="partners">
+    <div class="kicker">The team</div>
+    <div class="roster">
+      <div class="r"><span class="nm">Elijah Fox</span><span class="org">Atlantic Records</span></div>
+      <div class="r"><span class="nm">Ben Lichtenstein</span><span class="org">Range Media Partners</span></div>
+      <div class="r"><span class="nm">Tyler Smith &amp; Simen Solvang</span><span class="org">Depalma House</span></div>
+    </div>
+    <p class="spons">Seeking partners and sponsors — product placement, pre-roll "Presented by" credits,
+    watermark branding, and revenue sharing available.</p>
+  </section>
+
+</div>
+
+<script>
+  (function(){
+    var v=document.getElementById('trailer'), s=document.getElementById('sound');
+    if(!v||!s) return;
+    function keep(){ if(v.paused){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); } }
+    v.addEventListener('loadeddata',keep);
+    function upd(){
+      s.classList.toggle('on', !v.muted);
+      s.setAttribute('aria-label', v.muted ? 'Turn trailer sound on' : 'Mute trailer');
+    }
+    s.addEventListener('click',function(){
+      v.muted=!v.muted;
+      if(!v.muted){ v.volume=1; var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+      upd();
+    });
+    upd(); keep();
+  })();
+</script>
+</body>
+</html>
