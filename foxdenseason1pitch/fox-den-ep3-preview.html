@@ -13,12 +13,15 @@
   body{
     font-family:"Roboto",Arial,sans-serif;
     background:radial-gradient(700px 420px at 50% 0%, #241c14 0%, #15120e 60%);
-    min-height:100vh;display:flex;align-items:center;justify-content:center;padding:9px;overflow:hidden;
+    display:flex;align-items:flex-start;justify-content:center;padding:9px 9px 0;overflow:hidden;
     -webkit-font-smoothing:antialiased;
   }
 
   .yt{width:412px;max-width:100%;background:var(--bg);color:var(--text);
       border-radius:6px;overflow:hidden;position:relative;}
+  .yt::after{content:"";position:absolute;left:0;right:0;bottom:0;height:215px;
+      background:linear-gradient(180deg,rgba(15,15,15,0) 0%,rgba(15,15,15,.72) 55%,#0f0f0f 100%);
+      pointer-events:none;z-index:6;}
 
   /* ---- player / thumbnail ---- */
   .player{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;}
@@ -91,8 +94,8 @@
         <div class="scrim"></div>
         <div class="ov">
           <div class="mark">The Fox Den</div>
-          <div class="names">Elijah Fox <span class="amp">&amp;</span> Braxton Cook</div>
-          <div class="ep">Season One · Episode Three</div>
+          <div class="names">Elijah Fox <span class="amp">&amp;</span> Yussef Dayes</div>
+          <div class="ep">Season One · Episode One</div>
         </div>
         <div class="playc"><div class="b"></div></div>
         <span class="dur">17:43</span>
@@ -101,7 +104,7 @@
 
       <!-- content -->
       <div class="content">
-        <div class="vtitle">Elijah Fox and Braxton Cook | The Fox Den — Season 1, Episode 3</div>
+        <div class="vtitle">Elijah Fox and Yussef Dayes | The Fox Den — Season 1, Episode 1</div>
         <div class="vmeta">267K views · 2 weeks ago · <span class="more">...more</span></div>
 
         <div class="chrow">
@@ -132,7 +135,7 @@
           <div class="ca"></div>
           <div class="cb">
             <div class="who">@maya.keys · 2 weeks ago</div>
-            <div class="tx">that key change around 6:30 and then Braxton just walks in over the top — the whole room lifts, need this one on vinyl</div>
+            <div class="tx">that key change around 6:30 and then Yussef just locks in underneath — the whole room lifts, need this one on vinyl</div>
           </div>
         </div>
       </div>
