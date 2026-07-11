@@ -86,12 +86,33 @@
       margin-bottom: 1.5rem;
     }
 
+    .header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+    }
+
     .header h1 {
       font-size: 0.75rem;
       font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       color: #999;
+    }
+
+    .header h1 a,
+    .header .shop-link {
+      font-size: 0.75rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #999;
+      text-decoration: none;
+    }
+
+    .header h1 a:hover,
+    .header .shop-link:hover {
+      color: #ccc;
     }
 
     /* Year sections */
@@ -305,7 +326,9 @@
 <body>
   <div class="container">
     <header class="header">
-      <h1>depalma.house</h1>
+      <h1><a href="/">depalma.house</a></h1>
+      <a class="shop-link" href="https://www.etsy.com/shop/DepalmaCables" target="_blank" rel="noopener">Cable Shop</a>
+      <a class="shop-link" href="https://elasticstage.com/depalmahouse" target="_blank" rel="noopener">Vinyl Shop</a>
     </header>
 
     <main id="catalog"></main>
