@@ -22,7 +22,8 @@
     }
 
     .container {
-      max-width: 1050px;
+      /* column is capped by window height so first artwork + caption fit on load (square art: width ≈ height) */
+      max-width: min(1050px, calc(100vh - 150px));
       margin: 0 auto;
       padding: 2rem 2rem;
     }
